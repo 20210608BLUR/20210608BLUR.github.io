@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://kit.fontawesome.com/4f9a2aa392.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css"  href="CSS.css/">
+<style>
+    *{
+        margin: 0px;
+        padding: 0px;
+        list-style: none;
+    }
+    body{
+        background-image:url("CSS.css/original.png") 
+    }
+    .top{
+        position: fixed;
+        top: 0px;
+    }
+    .first-nav{
+        width: 1260px;
+        height: 40px;
+        background-color: #343a40;
+    } 
+    .first-nav-item{
+        width: 100%;
+        text-align: center;
+        display: flex;
+        justify-content: flex-end;
+    }
+    a{
+        color: white;
+        text-decoration: none;
+        margin: 10px;
+    }
+    a:hover{
+        color: blue;
+    }
+    .fas.fa-globe{
+        color: white;
+        font-size: 20px;
+        margin: 10px;  
+    }
+    .fas.fa-globe:hover{
+        color:blue;
+    }
+    .second-nav{
+        width: 1260px;
+        height: 80px;
+        background-color: white;
+        align-items: center;
+        justify-self: flex;
+    }
+    .second-nav-out{
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+    .shopline{
+        align-items: center;
+        display: flex;
+    }
+    .second-nav-item{
+        align-items: center;
+        justify-content: flex;
+    }
+    .second-nav-link{
+        color: #000;
+        align-items: center;
+        justify-content: center;
+    }
+    .btn {
+        font-size: 15px;
+        text-align: center;
+        display: inline-block;
+        width: 100px;
+        height: 25px;
+        background-color: blue;
+        border-radius: 50px;
+        padding: 5px;
+    }
+    .btn:hover{
+        background-color: darkblue;
+        color: white;
+    }
+    .none{
+        width: 1280px;
+        height: 300px;
+    }
+    .main{
+        width: 1280px;
+        display: flex;
+    }
+    .main-pic{
+        width: 50%;
+    }
+    .main-pic img{
+        width: 640px;
+    }
+    .main-text{
+        width: 640PX;
+    }
+    .main-text h1{
+        color:white;
+        display: block;
+        margin: 20px;
+    }
+    .main-text p{
+        color: white;
+        font-size: 18px;
+        display: block;
+        margin: 20px;
+    }
+    .main-text label{
+        color:white;
+        text-align: right;
+        margin: 20px;
+    }
+    .words{
+        width: 1280px;
+        color:black;
+        font-size: 20px;
+        text-align: center;
+        display: block;
+        padding: 20px;
+        background-color: white;
+    }
+    .words h2{
+        padding: 20px;
+    }  
+    .words p{
+        font-size: 18px;
+    }  
+    .second{
+        width: 1280px;
+        background-color: white;
+        padding: 20px;
+    }
+    .second-item{
+        display: flex;
+    }
+    .second-item:nth-child(even){
+        flex-direction: row-reverse;
+    }
+    .second-text{
+        width: 640px;
+    }
+    .second-text h2{
+        font-size: 30px;
+    }
+    .second-pic{
+        width: 50%;
+    }
+    .second-pic img{
+        width: 640px;
+    } 
+    .second-link{
+        color:blue;
+    }
+    .words2 {
+        background-color:#f8f9fa;
+        width: 1280px;
+        color:black;
+        text-align: center;
+        display: block;
+        padding: 20px;
+        font-size: 20px;
+    }
+    .words2 h2{
+        display: block;
+    }
+    .first-icon{
+        padding: 20px;
+        background-color: #f8f9fa;
+        width: 1280px;
+        flex-direction: row;
+        justify-content: space-evenly;
+        display: flex;
+        text-align: center;
+    }
+    .first-icon p{
+        width: 290px;
+        text-align: left;
+    }
+    .first-icon img{
+        background-color: white;
+        border-radius: 100%;  
+    }
+    .brand{
+        background-color: white;
+        text-align: center;
+        font-size: 25px;
+        width: 1280px;
+        padding: 20px;
+    }
+    .brand i{
+        font-size: 80px;
+        color: #000;
+        text-align: center;
+        padding: 70px;
+    }
+    .brand i:hover{
+        color: blue;
+    }
+    .special-beand{
+        background-color: white;
+        width: 1280px;
+        padding: 20px;
+        display: flex;
+    }
+    .earth{
+        width: 1280px;
+        display: flex;
+    }
+    .earth-pic{
+        width: 50%;
+    } 
+    .earth-pic img{
+        width: 640px;
+    }
+    .earth-text{
+        width: 640px;
+    }
+    .earth-text h1{
+        color:white;
+        padding: 50px;
+    }
+    .earth-text a{
+        font-size: 20px;
+        text-align: center;
+        display: inline-block;
+        width: 350px;
+        height: 30px;
+        background-color: blue;
+        border-radius: 50px;
+        padding: 5px;
+    }
+    .earth-text a:hover{
+        background-color: darkblue;
+        color: white;
+    }
+    .footer-list{
+        background-color:rgb(5, 5, 36);
+        width: 1320px;
+        display: flex;
+        text-align: center;
+        justify-content: center;
+    }
+    .footer-item{
+        display: flex;
+        justify-content: center;
+        margin: 40px;
+        color:white
+    } 
+    .footer-list a{
+        color:grey;
+    }
+    .footer-list a:hover{
+        color: white;
+    }
+    .second-footer-group{
+        width: 1280px;
+        display: flex;
+        justify-content: space-around;
+
+    }
+    .second-footer{
+        display: flex;
+        justify-content: space-around;
+        padding: 20px;
+    }
+    .address{
+        color:grey;
+    }
+</style>
+</head>
+
+<body>
+    
+    <div class="top">
+        <div class="first-nav">
+            <nav class="first-nav-item">
+                <i class="fas fa-globe"></i>
+                <a href="https://shopline.tw/faq/overview" target="faq">幫助中心</a>
+                <a href="https://sso.shoplineapp.com/users/sign_in" target="users">登入網店</a>
+            </nav>
+        </div>
+        <div class="second-nav">
+            <div class="second-nav-out">
+                <div class="shopline"><a href="https://shopline.tw/"><img src="ia_100000002.png" alt=""></a>
+                </div>
+                <nav class="second-nav-item"></nav>
+                        <a class="second-nav-link" href="">開店服務</a>
+                        <a class="second-nav-link" href="">方案費用</a>
+                        <a class="second-nav-link" href="">客戶案例</a>
+                        <a class="second-nav-link" href="">開店說明會</a>
+                        <a class="second-nav-link" href="">開店諮詢</a>
+                        <a class="second-nav-link" href="">更多解決方案</a>
+                        <a class="second-nav-link" href="">其他資源</a>
+                </nav>
+                <a class="btn" href="https://sso.shoplineapp.com/users/sign_up?locale=zh-hant&ref=shopline.tw&utm_campaign=B%3AStreet%3ATW%3AShopline&utm_content=B%3Abrand%3Ashopline%3Aexact&utm_medium=cpc&utm_source=bing">免費試用</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="none"></div>
+
+    <div class="main">
+        <div class="main-text">
+            <h1>想在哪開店創業<br>網路開店一站式輕鬆開賣</h1>
+            <p><strong>超過 25 萬品牌使用！從個人賣家到國際品牌，都能以 SHOPLINE 實現全通路零售，快速拓展市場到世界各地，輕鬆開始你的『 店 』商生意！</strong></p>
+            <div>
+                <label for="">輸入電子信箱</label>
+                <input id="user_name" type="email">
+                <a class="btn" href="https://sso.shoplineapp.com/users/sign_up?locale=zh-hant&ref=shopline.tw&utm_campaign=B%3AStreet%3ATW%3AShopline&utm_content=B%3Abrand%3Ashopline%3Aexact&utm_medium=cpc&utm_source=bing">免費試用</a>
+            </div>
+        </div>
+        <div class="main-pic"><img src="ia_100000003.png" alt=""></div>   
+    </div>
+
+    <div class="words">
+        <h2>單一平台就能助你<br>在全通路輕鬆開店創業</h2>
+        <p>從網路商店架站到實體門市管理，只需要一個平台，就能輕鬆實現開店創業，<br>
+            並能同步管理所有銷售管道，SHOPLINE 助你賣得更多、賣得更好！
+        </p>
+    </div>
+
+    <div class="second">
+        <div class="second-item">
+            <div class="second-text">
+                <h2>免寫程式、多款版型<br>輕鬆打造全能電商網站</h2>
+                <p>不會寫程式也能輕鬆架設品牌電商官網！任何產業都能找到合適的專業設計版型，以滑鼠拖曳就能完成網頁編輯，讓架設網站就像堆積木一樣簡單。
+                </p>
+                <ul>
+                    <li>豐富版型主題與字型搭配</li>
+                    <li>獨有網址 ＆ SSL 安全憑證</li>
+                    <li>一頁商店</li>
+                    <li>RWD 響應式網頁設計</li>
+                    <li>SEO 搜尋引擎優化</li>
+                    <li>開放 HTML／CSS 編輯</li>
+                </ul>
+                <a class="second-link " href="https://shopline.tw/online-store-setup">看看開店祕笈</a>
+            </div>
+            <div class="second-pic"><img src="ia_100000006.png" alt=""></div>
+        </div>
+
+        <div class="second-item">
+            <div class="second-text">
+                <h2>支持海內外電商<br>金流、物流一次搞定</h2>
+                <p>支持在地及國際金流、物流串接服務，提供海內外顧客最便利的付款及送貨服務，加速消費者完成下單交易，大幅降低購物車放棄率！
+                </p>
+                <ul>
+                    <li>線上信用卡刷卡</li>
+                    <li>超商代碼／條碼繳費</li>
+                    <li>超商／宅配貨到付款</li>
+                    <li>第三方金流／行動支付整合</li>
+                    <li>多溫層宅配並指定運費</li>
+                    <li>發票開立與串接</li>
+                </ul>
+                <a  class="second-link" href="https://shopline.tw/features/online-store#payments-and-shipping">看了解更多金物流</a>
+            </div>
+            <div class="second-pic"><img src="ia_100000007.png" alt=""></div>
+        </div>
+
+        <div class="second-item">
+            <div class="second-text">
+                <h2>刺激下單，創造回購<br>行銷導流、促購模組任你玩</h2>
+                <p>多元優惠活動、會員集客機制、網紅分潤以及直播購物等豐富功能，將電商行銷玩法一網打盡，助你成功優化行銷活動成效，刺激顧客下單、吸引鐵粉回購！
+                </p>
+                <ul>
+                    <li>超過 20 種優惠促銷功能</li>
+                    <li>會員分級／點數／購物金</li>
+                    <li>Instagram 購物功能</li>
+                    <li>社群直播購物系統</li>
+                    <li>Facebook／Google／LINE 廣告追蹤</li>
+                    <li>Facebook／LINE 對話式購物</li>
+                </ul>
+                <a class="second-link" href="https://shopline.tw/features/online-store#promotion">看更多優惠模組</a>
+            </div>
+            <div class="second-pic"><img src="ia_100000008.png" alt=""></div>
+        </div>
+
+        <div class="second-item">
+            <div class="second-text">
+                <h2>O2O 全通路無縫整併<br>輕鬆管理網店、門市以及其他通路</h2>
+                <p>不論是網店拓展門市，還是門市想發展網路生意，從商品、庫存、訂單等各項虛實店舖的資料都能完善整併，輕鬆實現全通路會員經營到多店營運。
+                </p>
+                <ul>
+                    <li>門市 POS 系統</li>
+                    <li>門市快速集客工具</li>
+                    <li>進銷庫存／調撥／多店管理</li>
+                    <li>線上線下會員／商品／庫存整合</li>
+                    <li>O2O 即時銷售報表分析</li>
+                    <li>串接 Shopee 蝦皮購物庫存</li>
+                </ul>
+                <a class="second-link" href="https://shopline.tw/features/online-store#multi-channels">了解更多全通路整合</a>
+            </div>
+            <div class="second-pic"><img src="ia_100000009.png" alt=""></div>
+        </div>
+    </div>
+
+    <div class="words2"><h2>更多功能與服務</h2></div>
+
+    <div class="first-icon">
+        <div class="item">
+            <img src="ia_100000010.png" alt="">
+            <div class="text">
+                <h3>強大庫存及訂單系統</h3>
+                <p>從商品數量、貨況到訂單付款狀態、物流貨態一目瞭然，提升營運效率超有感。</p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="ia_100000011.png" alt="">
+            <h3>即時化商店業績分析</h3>
+            <p>圖表化報表助你一手掌握商店概況，讓數據助攻企業成長，營運策略更有方向。</p>
+        </div>
+        <div class="item">
+            <img src="ia_100000012.png" alt="">
+            <h3>多國語系、幣值切換</h3>
+            <p>想做跨境電商也ＯＫ！提供語言、幣別、稅金等進階功能，友善應對海外消費需求。</p>
+        </div>
+    </div>  
+    
+    <div class="first-icon">
+        <div class="item">
+            <img src="ia_100000013.png" alt="">
+            <h3>專業顧問線上支援</h3>
+            <p>迅速、透明的溝通管道，協助你快速解決從線上到線下、從在地到海外的網店疑難。</p>
+        </div>
+        <div class="item">
+            <img src="ia_100000014.png" alt="">
+            <h3>廣告行銷加值服務</h3>
+            <p>由官方認證的專業投手團隊，協助品牌投遞 Facebook、Google、LINE 等廣告。</p>
+        </div>  
+        <div class="item">   
+            <img src="ia_100000015.png" alt="">
+            <h3>老闆專屬成長社群</h3>
+            <p>致力為品牌店家打造能深度交流且互助的生態體系，是拓展人脈、商機的絕佳場域。</p>
+        </div>
+    </div>
+
+    <div class="brand">
+        <h2>人氣品牌一致推薦使用</h2>
+        <a href="#"><i class="fab fa-btc"></i></a>
+        <a href="#"><i class="fas fa-lemon"></i></a>
+        <a href="#"><i class="fab fa-stripe-s"></i></a>
+        <a href="#"><i class="fas fa-shoe-prints"></i></a>
+        <a href="#"><i class="far fa-lightbulb"></i></a>
+    </div>
+
+    <div class="special-beand">
+        <p>SHOPLINE 在行動裝置上操作的順暢度很高；使用者給的建議與意見會採納，處理的速度也不錯；還一直有新功能推出，不斷成長。<br>BONNY & READ 店長, Stan</p>
+        <img src="ia_100000016.jpg" alt="">
+    </div>
+
+    <div class="earth">
+        <div class="earth-text">
+            <h1>全亞洲超過<br>250,000 個品牌都在使用 SHOPLINE</h1>
+            <a href="https://sso.shoplineapp.com/users/sign_up?locale=zh-hant&ref=shopline.tw&utm_campaign=B%3AStreet%3ATW%3AShopline&utm_content=B%3Abrand%3Ashopline%3Aexact&utm_medium=cpc&utm_source=bing">免費試用14天</a>
+        </div>
+        <div class="earth-pic"><img src="ia_100000017.png" alt=""></div>   
+    </div>
+
+    <div class="footer-list-group">
+        <footer class="footer-list">
+            <div class="footer-item">
+                <ul>
+                    <li>SHOPLINE</li>
+                    <li><a href="#">關於我們</a></li>
+                    <li><a href="#">認識團隊</a></li>
+                    <li><a href="#">人才招募</a></li>
+                    <li><a href="#">合作機會</a></li>
+                    <li><a href="#">精選夥伴</a></li>
+                    <li><a href="#">媒體報導</a></li>
+                </ul>
+            </div>
+            <div class="footer-item">
+                <ul>
+                    <li>我要開店</li>
+                    <li><a href="#">方案費用</a></li>
+                    <li><a href="#">功能模組</a></li>
+                    <li><a href="#">客戶案例</a></li>
+                    <li><a href="#">開店說明會</a></li>
+                    <li><a href="#">開店諮詢</a></li>
+                </ul>
+            </div>
+            <div class="footer-item">
+                <ul>
+                    <li>功能特色</li>
+                    <li><a href="#">網路開店</a></li>
+                    <li><a href="#">社群購物</a></li>
+                    <li><a href="#">零售POS</a></li>
+                    <li><a href="#">電商物流</a></li>
+                    <li><a href="#">訂單管理</a></li>
+                    <li><a href="#">一頁商店</a></li>
+                </ul>
+            </div>
+            <div class="footer-item">
+                <ul>
+                    <li>開店資源</li>
+                    <li><a href="#">開店祕笈</a></li>
+                    <li><a href="#">版型主題</a></li>
+                    <li><a href="#">新手問答</a></li>
+                    <li><a href="#">POS硬體</a></li>
+                </ul>
+            </div>
+            <div class="footer-item">
+                <ul>
+                    <li>更多解決方案</li>
+                    <li><a href="#">企業旗艦方案</a></li>
+                    <li><a href="#">跨境電商方案</a></li>
+                    <li><a href="#">廣告計劃方案</a></li>
+                </ul>
+            </div>
+            <div class="footer-item">
+                <ul>
+                    <li>其他資源</li>
+                    <li><a href="#">電商教室</a></li>
+                    <li><a href="#">充電工作坊</a></li>
+                    <li><a href="#">DreamBig創品牌</a></li>
+                    <li><a href="#">電商成長學苑</a></li>
+                    <li><a href="#">LINE官方帳號</a></li>
+                </ul>
+            </div>
+            <div class="footer-item">
+                <ul>
+                    <li>應用案例</li>
+                    <li><a href="#">實體零售</a></li>
+                    <li><a href="#">O2O全通路</a></li>
+                    <li><a href="#">社交商務</a></li>
+                    <li><a href="#">社群電商工具包</a></li>
+                </ul>
+            </div>
+        </footer>
+
+        <div class="second-footer-group">
+            <footer class="second-footer">
+                <nav>
+                    <a class="#" href="">網站地圖</a>
+                    <a class="#" href="">隱私權政策</a>
+                    <a class="#" href="">會員條款</a> 
+                </nav>
+                <div class="link">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-invision"></i></a>
+                    <a href="#"><i class="fas fa-image"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fas fa-envelope-square"></i></a>
+                </div>
+                <div class="address">
+                    <p>服務時間 星期一至五 上午 10 點至晚上 7 點<br>© Copyright 2013-21 SHOPLINE Limited.</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+    
+</body>
+</html>
