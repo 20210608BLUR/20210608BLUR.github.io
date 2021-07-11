@@ -1,0 +1,213 @@
+.top-nav{
+    position: fixed;
+    position: sticky;
+    top: 0px;
+    z-index: 2;
+}
+.fas.fa-globe::after{
+    content: "|";
+    padding: 5px 0px 5px 10px;
+    display: inline-block;
+}
+.breadcrumb{
+    background-color: #051627;
+}
+.bread a{
+    color: white;
+}
+.bread a:hover{
+    color: blue;
+}
+.nav-link{
+    color: black;
+}
+.nav-link.ln::after{
+    content: "∨";
+    font-size: 4px;
+    padding: 3px;
+} 
+.second-brand a::after{
+    content: "→";
+}
+.btn1{
+    margin-left: 100px;
+}
+.banner{
+    background-image: url(./original.png);
+}
+input{
+    width: 300px;
+    height: 20px;
+    margin: 20px;
+    font-size: 20px;
+    background-color: transparent;  
+    border: transparent;
+    text-align: left;
+}
+::placeholder{
+    color: white;
+}
+label{
+    border-bottom: 1px solid white;
+}
+.carousel-inner{
+    background-image: url(./original.png);
+}
+.carousel-item .text{
+    padding: 30px;
+}
+.carousel-item h1{
+    color:white;
+    display: block;
+    margin: 20px;
+}
+.carousel-item p{
+    color: white;
+    font-size: 18px;
+    display: block;
+    margin: 20px;
+}
+.words{
+    width: auto;
+    font-size: 20px;
+    text-align: center;
+}
+.words h2{
+    padding: 20px;
+}  
+.words p{
+    font-size: 18px;
+}  
+.second-img img{
+    width: 100%;
+}
+.second-text p::before{
+    content: "✔";
+    display: inline-block;
+    text-align: center;
+    font-size: 13PX;
+    width: 18px;
+    color: lightblue;
+    border-radius: 100px;
+    background-color:rgb(158, 204, 241);
+    margin: 5px;
+}
+.second-link::after{
+    content: "→";
+}
+.second-text h2{
+    font-size: 30px;
+    margin: 10px;
+}
+.first-icon{
+    justify-content: center;
+    align-items: center;
+}
+.first-icon img {  
+    border-radius: 100%;
+    background-color: white;
+    box-shadow: 0px 0px 10px 5px lightgray ;
+}
+.words2 {
+    background-color:#f8f9fa;
+    width: auto;
+    text-align: center;
+    font-size: 20px;
+}
+.card-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.brand .col{
+    border-bottom: 2px solid grey;
+}
+.brand .col:hover{
+    border-bottom: 2px solid blue;
+} 
+.sb{
+    display: inline-block;
+    text-align: left;
+}
+.earth{
+        background-image: url(./original.png);   
+}
+.btn3::after{
+    content: "→";
+} 
+.second-footer{
+    background-color:#051627;
+    width: auto;
+}
+.second-footer h5{
+    color: white;
+    display: block;
+    text-align: center;
+    padding: 30px 4px 20px 0px;
+    
+}
+.second-footer a{
+    color: rgb(86, 86, 117);
+    text-decoration: none;   
+}
+.line::before{
+    content: "________________________________________________________________________________________________________________________________________________________";
+    color: rgb(92, 107, 128);
+    text-align: center;
+    background-color:#051627;
+    display: block;
+}
+.btn4{
+    width: auto;
+    background-color:#051627;
+    display: flex;
+    flex-direction: row-reverse;
+    
+}
+.btn4 .btn{
+    background-color: rgb(191, 219, 230);
+    color: black;
+    margin: 50px;
+}
+.buttom{
+    background-color:#051627;
+}
+.buttom-b a{
+    text-decoration: none;
+    color: white;
+}
+.buttom a:hover{
+    color: blue;
+}
+.buttom-b a:first-child:after{
+    content: "|";
+    margin: 10px;
+    color: white;
+} 
+.buttom-b a:nth-last-child(2):after{
+    content: "|";
+    margin: 10px;
+    color: white;
+} 
+.buttom-i{
+    display: flex;
+    justify-content: space-evenly;  
+}
+.buttom i{
+    font-size: 30px;
+    color: rgb(46, 46, 65);
+}
+.buttom i:hover{
+    color: blue;
+}
+.buttom-p p{
+    width: 100%;
+    color: rgb(92, 107, 128);
+}
+.message img{
+    width: 50px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
