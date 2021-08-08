@@ -89,6 +89,7 @@
         if(_color == '-1'|| _storage == '-1' || _network == '-1'){
                 document.querySelector('.btn').disabled = true;
                 show.innerHTML = ''
+                top1.innerHTML = ''
                 return;
         }
 
@@ -117,6 +118,7 @@
     
     function finallyPrice(){
                 show.innerHTML= ''
+                top1.innerHTML = ''
                 let finallyArray = iPadArray.filter(x =>x.color == _color && x.storage == _storage && x.network == _network)
                 finallyArray.forEach((item, index)=>{
                     let iPad = document.createTextNode(item.price)
