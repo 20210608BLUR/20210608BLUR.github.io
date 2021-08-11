@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+    <style>
+        h1{
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+        .card{
+            margin: auto;
+            padding: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .card-text{
+            flex-grow: 1;
+        }
+        .imgLol{
+            width: 300px;
+            height: 177px;
+        }
+        .modal-body{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        #description{
+            line-height: 2;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="header text-center my-4">LOL 英雄聯盟圖鑑</h1>
+        <div class="d-flex my-5">
+            <button id="fetch" type="button" class="btn btn-outline-secondary btn-lg ms-4 mx-2">fetch</button>
+            <button id="xhr" type="button" class="btn btn-outline-secondary btn-lg ms-3">XHR</button>
+        </div>
+        <div class="row"></div>
+    </div>
+
+    <!-- Template 宣告牌卡 -->
+    
+    <template id="lolCard">
+        <div class="card my-2" style="width: 13rem">
+            <img src="..." class="card-img-top" alt="...">
+            <h5 class="card-title">Card title</h5>
+            <p class="p card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <div class="d-flex">
+                <button href="#" id="btn1" type="button" class="btn btn-outline-secondary mx-1 my-2" data-toggle="modalLol" data-target="#modal1">詳細</a></button>
+                <a class="btn btn-outline-secondary mx-1 my-2">影片</a>
+            </div>
+        </div>
+    </template>
+
+    <!-- Modal -->
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="title modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" >
+                <img class="imgLol" src="" alt="">
+                <p id="description" class="mt-4"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let lol = 'https://ddragon.leagueoflegends.com/cdn/10.22.1/data/zh_TW/champion.json'
+        let imgUrl = 'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${keyName}_0.jpg'
+        let lolArraynameFet = []
+        let lolObject = {}
+        let card = document.querySelector('#lolCard')
+        let modal = document.querySelector('#exampleModal')
+        let row = document.querySelector('.row')
+        
+        window.onload = () =>{
+            let btnFetch = document.querySelector("#fetch")
+            btnFetch.addEventListener('click', function(){
+                fetchLol()
+            })
+            let btnXhr = document.querySelector("#xhr")
+            btnXhr.addEventListener('click', function(){
+                xhrLol()
+            })
+        }
+    
+        
+        function fetchLol(){
+            fetch(lol)
+            .then(response =>response.json())
+            .then(result =>{
+                lolObject = result.data
+                lolArrayNameFet = Object.keys(lolObject) 
+                lolArrayValueFet = Object.values(lolObject)
+                //console.log(lolArrayNameFet)
+                //console.log(lolArrayValueFet)
+                get()
+            })
+            .catch(ex =>{
+                console.log(ex)
+            })
+            .finally()
+        }
+        
+        function xhrLol(){
+            let promise1 = xhrCall(lol)
+            .then(result =>{
+                result = JSON.parse(result)
+                lolObject = result.data
+                console.log(lolObject)
+                lolArrayNameFet = Object.keys(lolObject) 
+                lolArrayValueFet = Object.values(lolObject)
+                get()
+                
+            })
+        }
+
+        function xhrCall(url){
+            let promise = new Promise((resolve, reject)=>{
+                const xhr = new XMLHttpRequest()
+                xhr.onload = ()=>resolve(xhr.responseText)
+                xhr.onerror =()=>reject(xhr.status)
+                xhr.open('GET', url)
+                xhr.send() 
+            })
+            return promise
+        } 
+
+        function get() {
+            let index = 1 
+            lolArrayNameFet.forEach((name, index) =>{
+            let lolArrayNameFet1 = lolObject[name] 
+            console.log(lolArrayNameFet1)
+
+            lolArrayValueFet.forEach(item =>{
+            let img = lolArrayNameFet[index]
+            let cloneContent = card.content.cloneNode(true)
+            cloneContent.querySelector('h5').innerText = `${index++} : ${item.name} - ${item.id}`
+            cloneContent.querySelector('p').innerText = item.blurb
+            cloneContent.querySelector('img').src = `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${lolArrayNameFet[index]}_0.jpg`
+        
+            cloneContent.querySelector('#btn1').addEventListener('click', function(){
+                this.setAttribute('data-toggle', 'modal')
+                this.setAttribute('data-target', '#exampleModal')
+                modal.querySelector('.title').innerText = `${item.name} - ${item.id}`
+                modal.querySelector('#description').innerHTML = `HP : ${item.stats.hp} <br> Move Speed : ${item.stats.movespeed} <br> Armor : ${item.stats.armor} <br> Spell Block : ${item.stats.spellblock} <br> Attack Range : ${item.stats.attackrange}`
+                modal.querySelector('.imgLol').src =`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${img}_0.jpg`
+                })
+            row.append(cloneContent)   
+                })
+            }) 
+        }
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    
+</body>
+</html>
