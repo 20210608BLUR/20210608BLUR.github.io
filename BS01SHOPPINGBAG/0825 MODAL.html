@@ -16,13 +16,25 @@
             justify-content: start;
         }
         .groupOrderBtn{
-            background-color: rgb(233, 230, 230);
+            background-color: rgb(238, 238, 238);
+        }
+        .select{
+            height: 38px;
+            width: 90px;
+            padding:10px ;
+            border-radius: 20px;
+            background: rgb(238, 238, 238);
+            justify-content: center;
+            align-items: center;
         }
         select{
-            height: 35px;
-            width: 70px;
+            height: 36px;
+            width: 80px;
             border-radius: 20px;
-            margin: 15px;
+            border: 0px;
+            line-height: 36px;
+            padding:0px 5px 0px 0px;
+            background: rgb(238, 238, 238);
         }
         a{
             color: black;
@@ -32,7 +44,7 @@
             text-decoration: none;
         }
         .otherItems{
-            background-color: rgb(233, 230, 230);
+            background-color: rgb(238, 238, 238);
             width: 450px;
             height: 45px;
             display: flex;
@@ -50,6 +62,9 @@
         }
         .orderContentDiv{
             text-align: left;
+        }
+        .orderContentDiv span:first-child{
+            font-size: 16px;
         }
         
         .previewOrderDiv{
@@ -75,11 +90,12 @@
             font-size: 18px;
         }
         #price{
-            margin-left: 100px;
+            margin-left: 90px;
         }
         .img{
             justify-content: center;
             align-items: center;
+            
         }
         
     </style>
@@ -98,21 +114,25 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="groupOrderDiv modal-footer footer border-0 mb-2">
+                    <div class="groupOrderDiv modal-footer footer mb-1 border-0">
                         <button type="button" class="groupOrderBtn btn rounded-pill"data-toggle="modal" data-target="#groupOrder"><i class="fas fa-user-plus mx-1"></i><span>團購訂單</span></button>            
                     </div>
-                    <div class="d-flex">
-                        <select name="" id="remove">
-                            <option value="">移除</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select>
+                    <div class="d-flex ml-3">
+                        <div class="select d-flex">
+                            <select name="" id="remove">
+                                <option value="">移除</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
                             <button class="orderContentDiv btn" data-toggle="modal" data-target="#contentDetail"   >
-                                荔枝冰凍茶飲<br>
-                                甜度選擇 Sweewness Level<br>
-                                無糖 Sugar-Free($9.00)<br>
+                                <span class="mt-1">荔枝冰凍茶飲</span><br>
+                                <span>
+                                甜度選擇 Sweewness Level
+                                無糖 Sugar-Free($9.00)
                                 仙草凍 Herb Jelly
+                                </span>
                             </button>
                         <div id="price">$99元
                         </div>
@@ -162,7 +182,7 @@
                     </button>
                 </div>
                 <div class="modal-body flex-column">
-                    <div class="img d-flex"><img src="./FAKEimg.jpeg" alt="">
+                    <div class="img d-flex"><img src="./d9f25a30-c346-49ad-aa9c-3e7748ee4e23.jpeg" alt="">
                     </div>
                 <div class="modal-footer">
                     <div class="previewOrderDiv"><button class="previewOrderBtn">
