@@ -28,7 +28,7 @@
 
     <div class="container-fluid ">
         <div class="row align-items-start">
-            <div class="col-6 px-5">
+            <div class="col-6 px-5 left">
                 <h1 class="my-3">五桐號 WooTEA 忠孝復興店</h1>
                 <div class="mapDiv">
                     <div id=map class="mb-3">map
@@ -36,8 +36,8 @@
                 </div>
 
                 <!-- Button trigger modal 設定地址-->
-                <div class="d-flex info">
-                    <div class="iconDiv">
+                <div class="d-flex addressInfo">
+                    <div class="iconDiv mb-1">
                         <i class="fas fa-home"></i>
                     </div>
                     <div class="mx-3 flex-grow-1">
@@ -45,7 +45,7 @@
                         <span>台北市大安區</span>
                     </div>
                     <div>
-                        <button type="button"class="editBtn btn rounded-pill" data-toggle="modal" data-target="#exampleModal">編輯
+                        <button type="button"class="editBtn btn  rounded-pill" data-toggle="modal" data-target="#exampleModal">編輯
                         </button>
                     </div>
                 </div>    
@@ -71,16 +71,16 @@
             
                 <!-- Button trigger modal 設定時間 -->
                 <div class="d-flex info">
-                    <div class="iconDiv">
+                    <div class="iconDiv pt-4 mb-2">
                         <i class="fas fa-child"></i>
                     </div>
-                    <div class="flex-grow-1 mx-3">
-                        <span>在門口碰面新增外送指示</span><br>
-                        <span>新增外送指示</span>
+                    <div class="flex-grow-1 mx-3 border-top pt-3">
+                        <span >在門口碰面新增外送指示</span><br>
+                        <span class="addInfo">新增外送指示</span>
                     </div>
                     <div>
                         <button type="button" class="editBtn btn rounded-pill" data-toggle="modal" data-target="#shippingInfoModal">編輯
-                        </button>
+                    </button>
                     </div>
                 </div>
                 <!-- Modal -->
@@ -160,20 +160,24 @@
                         <span>新增餐點</span>
                     </button>
                 </div>
-                <div class="d-flex orderContent">
-                    <select name="" id="remove">
-                        <option value="">移除</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                        <button class="orderContentBtn btn" data-toggle="modal" data-target="#contentDetail"   >
-                            荔枝冰凍茶飲<br>
-                            甜度選擇 Sweewness Level<br>
-                            無糖 Sugar-Free($9.00)<br>
-                            仙草凍 Herb Jelly
+                <div class="d-flex orderContent mt-3">
+                    <div class="select d-flex">
+                        <select name="" id="remove" class="my-3">
+                            <option value="">移除</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+                        <button class="orderContentBtn btn ml-2 pt-1" data-toggle="modal" data-target="#contentDetail">
+                            <span>荔枝冰凍茶飲</span><br>
+                            <span> 
+                                甜度選擇 Sweewness Level<br>
+                                無糖 Sugar-Free($9.00)<br>
+                                仙草凍 Herb Jelly
+                            </span>
                         </button>
-                    <div id="price">$99元
+                    <div id="price" >$99元
                     </div>
                 </div>
                 <div class="otherItems form-check my-3">
@@ -181,11 +185,11 @@
                     <input class="form-check-input" id="defaultCheck1"type="checkbox" style="zoom:180%">
                 </div>
             </div>
-            <div class="col-6 sticky-top pl-5">
+            <div class="col-6 sticky-top">
                 <div class="right">
                     <div class="order mt-3">
                         <button class="orderBtn btn">
-                            <span class="orderSpan">一鍵下訂單</span>
+                            <span>一鍵下訂單</span>
                         </button>
                     </div>
                     <div class="rule border-bottom my-4">
@@ -196,7 +200,7 @@
                         <p>您可透過 $0 外送費省下費用，此獎勵將於 Sep 22到期</p>
                     </div>
                     <ul class="border-bottom">
-                        <li class="d-flex">
+                        <li class="d-flex ">
                             <div>小計</div>
                             <span>$99.00</span>
                         </li>

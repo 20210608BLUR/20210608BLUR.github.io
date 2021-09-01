@@ -1,3 +1,9 @@
+body{
+    font-family: sans-serif;
+}
+.container {
+    max-width: 1920px;
+}
 
 .mapDiv{
     height: 50vh;
@@ -13,19 +19,34 @@ nav{
     width: auto;
     background-color: white;
 }
+.addressInfo{
+    font-size: 18px;
+    padding-top: 20px;
+    padding-bottom: 8px;
+    justify-content: center;
+    align-items: center;
+}
 .info{
     font-size: 18px;
-    
-    padding-top: 20px;
+    padding-top: 10px;
     padding-bottom: 20px;
     justify-content: center;
     align-items: center;
+}
+.addressInfo span:first-child{
+    font-size: 16px;
+}
+.addressInfo span:last-child{
+    font-size: 14px;
 }
 .info span:first-child{
     font-size: 16px;
 }
 .info span:last-child{
     font-size: 14px;
+}
+.addInfo{
+    color: rgb(5, 148, 79);
 }
 .fas.fa-home{
     font-size: 25px;
@@ -39,15 +60,26 @@ nav{
 .fas.fa-dot-circle{
     font-size: 25px;
 }
-select{
-    height: 35px;
-    width: 70px;
+.select{
+    height: 38px;
+    width: 90px;
+    padding:10px ;
     border-radius: 20px;
-    margin: 15px;
+    background: rgb(238, 238, 238);
+    justify-content: center;
+    align-items: center;
 }
-.price{
-    padding-left: 230px;
-    display: inline-block;
+select{
+    height: 36px;
+    width: 80px;
+    border-radius: 20px;
+    border: 0px;
+    line-height: 36px;
+    padding:0px 5px 0px 0px;
+    background: rgb(238, 238, 238);
+}
+#price{
+    margin-left: 180px;
 }
 .otherItems{
     background-color: rgb(246, 246, 246);
@@ -60,7 +92,9 @@ select{
 .otherItems input{
     margin-left: 90px;
 }
-
+.otherItems label{
+    width: 100%;
+}
 .order{
     background-color: rgb(175, 175, 175);
     border: 0px;
@@ -80,17 +114,20 @@ select{
     text-align: center;
     display: flex;
     height: 50px;
-
-    
 }
-.orderSpan{
+.orderBtn Span{
     line-height: 50px;
-    font-size: 14px;
+    font-size: 18px;
 }
 .addOrderBtn{
     background-color: rgb(238, 238, 238);
     height: 35px;
+    padding-left: 10px;
+    padding-right: 10px;
     border: 0px;
+}
+.addOrderBtn span{
+    font-size: 14px;
 }
 .addOrderDiv{
     padding-top: 20px;
@@ -103,17 +140,20 @@ select{
     width: 60px;
     height: 36px;
     border: 0px;
-    
 }
 .orderContentBtn{
     text-align: left;
 }
-.orderContent{
-    justify-content: space-between;
+.orderContentBtn span:first-child{
+    font-size: 16px;  
+}
+.orderContentBtn span:last-child{
+    font-size: 14px;
 }
 li{
     list-style: none;
     padding: 7px;
+    justify-content: space-between;
 }
 footer{
     height: 50px;
@@ -129,6 +169,10 @@ footer{
 }
 .rule span{
     color: rgb(5, 148, 79);
+    font-size: 12px;
+}
+.rule p{
+    font-size: 12px;
 }
 .iconDiv{
     width: 40px;
@@ -140,17 +184,16 @@ h3{
     font-size: 20px;
 }
 .deliverTime{
-    border-top: rgb(238, 238, 238)solid 2px;
+    border-top: rgb(238, 238, 238) solid 2px;
     justify-content: space-between;
     padding-top: 20px;
 }
 
 .deliverTime span{
     font-size: 18px;
-    
 }
 .setPavementTitle{
-    padding-top: 20px;
+    padding-top: 25px;
     border-top: rgb(238, 238, 238)solid 2px;
 }
 .setPavementDiv span{
@@ -159,9 +202,17 @@ h3{
 .setPavementDiv{
     justify-content: center;
     align-items: center;
-    padding-top: 20px;
+    padding-top: 15px;
     padding-bottom: 15px;
     border-bottom: rgb(238, 238, 238)solid 2px;
 }
-
-
+.btn{
+    font-size: 14px;
+}
+.right{
+    width: 382px;
+    margin-left: 120px;
+}
+#totalPrice{
+    justify-content: space-between;
+}
