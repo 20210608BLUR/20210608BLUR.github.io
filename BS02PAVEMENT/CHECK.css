@@ -60,6 +60,10 @@ nav{
 .fas.fa-dot-circle{
     font-size: 25px;
 }
+.fas.fa-plus{
+    display: inline-block;
+    font-size: 14px;
+}
 .select{
     height: 38px;
     width: 90px;
@@ -87,13 +91,17 @@ select{
     height: 45px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     margin: auto;
 }
 .otherItems input{
-    margin-left: 90px;
+    margin:15px;
 }
 .otherItems label{
-    width: 100%;
+    margin: 15px;
+}
+.otherItems div{
+    width: 417px;
 }
 .order{
     background-color: rgb(175, 175, 175);
@@ -128,6 +136,7 @@ select{
 }
 .addOrderBtn span{
     font-size: 14px;
+    display: inline-block;
 }
 .addOrderDiv{
     padding-top: 20px;

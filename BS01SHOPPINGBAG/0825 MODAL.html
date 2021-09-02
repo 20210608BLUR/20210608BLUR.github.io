@@ -46,19 +46,20 @@
         .otherItems{
             background-color: rgb(238, 238, 238);
             width: 450px;
-            height: 45px;
+            height: 54px;
             display: flex;
-            flex-direction: row-reverse; 
             align-items: center;
-            justify-content: space-evenly;
+            justify-content: space-between;
             margin: auto;
             font-size: 18px;
+            line-height: 20px;
         }
         .otherItems input{
-            margin-left:90px ;
+            margin-right:10px ;
         }
-        .otherItemsSpan{
-            margin-left: 10px;
+        .otherItems div{
+            width: 380px;
+            margin-left: 20px;
         }
         .orderContentDiv{
             text-align: left;
@@ -72,7 +73,7 @@
             border: 0px;
             width:450px;
             margin: auto;
-            height: 45px;
+            height: 56px;
             color: white;
             justify-content: center;
             display: flex;
@@ -86,7 +87,7 @@
             height: 45px;
         }
         .previewOrderSpan{
-            line-height: 45px;
+            line-height: 54px;
             font-size: 18px;
         }
         #price{
@@ -137,9 +138,9 @@
                         <div id="price">$99元
                         </div>
                     </div>
-                    <div class="otherItems my-3">
-                        <label for="checkbox"></label>
-                        <input type="checkbox" style="zoom:180%"><span class="otherItemsSpan">索取餐具、吸管等用品</span>
+                    <div class="otherItems my-2">
+                        <label for="checkbox"><div>索取餐具、吸管等用品</div></label>
+                        <input type="checkbox" id= "checkbox"  style="zoom:180%">
                     </div>
                     <div class="previewOrderDiv"><button class="previewOrderBtn" >
                         <span class="previewOrderSpan">前往結帳 • $99.00</span></button>
@@ -164,7 +165,7 @@
                 </div>
                 <div class="modal-footer">
                     <div class="previewOrderDiv"><button class="previewOrderBtn" >
-                        <span class="previewOrderSpan">建立訂單</span></button>
+                        <div class="previewOrderSpan">建立訂單</div></button>
                     </div>
                 </div>
             </div>
@@ -186,7 +187,7 @@
                     </div>
                 <div class="modal-footer">
                     <div class="previewOrderDiv"><button class="previewOrderBtn">
-                        <span class="previewOrderSpan">建立訂單</span></button>
+                        <div class="previewOrderSpan">建立訂單</div></button>
                     </div>
                 </div>
             </div>
