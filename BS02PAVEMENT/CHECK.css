@@ -1,10 +1,9 @@
 body{
     font-family: sans-serif;
 }
-.container {
+.container-fluid {
     max-width: 1920px;
 }
-
 .mapDiv{
     height: 50vh;
 }
@@ -54,15 +53,20 @@ nav{
 .fas.fa-child{
     font-size: 25px;
 }
-.fa-wallet{
-    font-size: 25px;
-}
 .fas.fa-dot-circle{
     font-size: 25px;
 }
+.fa-wallet{
+    font-size: 25px;
+}
 .fas.fa-plus{
-    display: inline-block;
     font-size: 14px;
+}
+.fas.fa-map-marker-alt{
+    font-size: 16px;
+}
+.orderContent{
+    justify-content: space-between;
 }
 .select{
     height: 38px;
@@ -82,9 +86,6 @@ select{
     padding:0px 5px 0px 0px;
     background: rgb(238, 238, 238);
 }
-#price{
-    margin-left: 180px;
-}
 .otherItems{
     background-color: rgb(246, 246, 246);
     width: auto;
@@ -100,31 +101,16 @@ select{
 .otherItems label{
     margin: 15px;
 }
-.otherItems div{
-    width: 417px;
-}
 .order{
     background-color: rgb(175, 175, 175);
     border: 0px;
-    width:auto;
+    width:600px;
     margin: auto;
-    height: 50px;
+    height: 60px;
     color: white;
     justify-content: center;
     align-items: center;
     display:flex; 
-}
-.orderBtn{
-    border: 0px;
-    background-color: rgb(175, 175, 175);
-    width: auto;
-    color: white;
-    text-align: center;
-    display: flex;
-    height: 50px;
-}
-.orderBtn Span{
-    line-height: 50px;
     font-size: 18px;
 }
 .addOrderBtn{
@@ -149,6 +135,7 @@ select{
     width: 60px;
     height: 36px;
     border: 0px;
+    font-size: 14px;
 }
 .orderContentBtn{
     text-align: left;
@@ -159,14 +146,14 @@ select{
 .orderContentBtn span:last-child{
     font-size: 14px;
 }
+ul{
+    padding: 0px;
+}
 li{
     list-style: none;
+    display: block;
     padding: 7px;
     justify-content: space-between;
-}
-footer{
-    height: 50px;
-    background-color: black;
 }
 .save{
     background-color: rgb(230, 242, 237);
@@ -215,13 +202,16 @@ h3{
     padding-bottom: 15px;
     border-bottom: rgb(238, 238, 238)solid 2px;
 }
-.btn{
-    font-size: 14px;
-}
-.right{
-    width: 382px;
-    margin-left: 120px;
-}
 #totalPrice{
     justify-content: space-between;
+    padding: 8px;
+}
+.modalAddress{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+footer{
+    height: 50px;
+    background-color: black;
 }
