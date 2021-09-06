@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://kit.fontawesome.com/4f9a2aa392.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <style>
+        body{
+            font-family: sans-serif;
+        }
+        nav{
+            height: 80px;
+            width: auto;
+            background-color: white;
+            position: fixed;
+        }
+        .imgDiv{
+            width: 302px;
+            height: 140px;
+            padding-right: 24px;
+        }
+        img{
+            width: 100%;
+            height: 100%;
+        }
+        .historyItem{
+            border-bottom: 1px solid rgb(238, 238, 238);
+        }
+        .historyItem a {
+            text-decoration: none;
+            color: black;
+            font-size: 20px;
+        }
+        .number{
+            margin-right: 16px;
+            font-size: 14px;
+            line-height: 20px;
+        }
+        .itemTitle{
+            font-size: 14px;
+            margin: 4px;
+        }
+        .itemGroup{
+            flex-grow: 1;
+            padding-right: 24px;
+        }
+        .itemGroup span{
+            font-size: 14px;
+        } 
+        .checkRes{
+            background-color: black;
+            width: 302px;
+            height: 56px;
+            display: flex;
+            justify-content: center; 
+            align-items: center;
+        }
+        .checkRes a {
+            color: white;
+            display: block;
+            text-align: center;
+            width: 100%;
+        }
+        ul{
+            padding-left: 0px;
+            margin-top: 16px;
+        }
+        li{
+            list-style: none;
+            margin-top: 16px;
+        }
+        .number{
+            height: 24px;
+            width: 24px;
+            justify-content: center;
+            text-align: center;
+        }
+        .iconDiv{
+            justify-content: center;
+            align-items: center;
+        }
+        .showContent{
+            display: flex;
+        }
+        .showContent span{
+            font-size: 16px;
+        }
+        .historyStore{
+            justify-content: space-between;
+            align-items: center;
+        }
+        .historyStore i{
+            color: rgb(117, 117, 117)
+        }
+        
+        .historyItem{
+            display: flex;
+        }
+        .sample{
+            display: none;
+        }
+        .showIcon{
+            display: flex;
+        }
+        .showRestaurant{
+            justify-content: center;
+            align-items: center;
+        }
+        .showRestaurant button{
+            background-color: black;
+        }
+        .showRestaurant span{
+            color: white;
+            font-size: 18px;
+        }
+        .historyItemSample{
+            display: none;
+            border-bottom: 1px solid rgb(238, 238, 238);
+        }
+        .historyItemSample a {
+            text-decoration: none;
+            color: black;
+            font-size: 20px;
+        }
+        .checkResSample{
+            background-color: black;
+            width: 302px;
+            height: 56px;
+            display: flex;
+            justify-content: center; 
+            align-items: center;
+        }
+        .checkResSample a {
+            color: white;
+            display: block;
+            text-align: center;
+            width: 100%;
+        }
+                
+    </style>
+
+</head>
+<body>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <nav class="navbar navbar-light">
+        <span class="navbar-brand mb-0 h1">BS EAT</span>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 mb-4">
+                <h1 class="font-weight-bold">過去的訂單</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 d-flex historyItem">
+                <div class="imgDiv">
+                    <img src="./FAKE1.jpeg">
+                </div>
+                <div class="itemGroup ml-2">
+                    <div class="historyStore d-flex">
+                        <a href="https://www.ubereats.com/tw/store/%E6%B5%B7%E5%A5%B3%E5%92%96%E5%95%A1-%E6%A5%A0%E6%A2%93%E5%BA%97/bKsuO4h6Q8GAHz4gQDn5Dg">海女咖啡 楠梓店</a>
+                    </div>
+                    <div class="itemTitle">
+                        4 份餐點，共 $0.00 • 8月23日 的 下午02:05 
+                    </div>
+                    <ul>
+                        <li class="d-flex">
+                            <div class="number border d-flex">1
+                            </div>    
+                            <div>
+                                <div>
+                                    <div>甜澄茉莉咖啡
+                                    </div>
+                                </div>
+                                <div>
+                                    <span>
+                                        中 (360 毫升)
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="d-flex">
+                            <div class="number border d-flex">1
+                            </div>    
+                            <div>
+                                <div>
+                                    <div>舒芙蕾
+                                    </div>
+                                </div>
+                            <div>
+                                <span>
+                                    原味蜂蜜 • 不要伊思尼鮮奶油
+                                </span>
+                            </div>
+                        </div>
+
+                        </li>
+                        <li class="d-flex">
+                            <div class="number border d-flex">1
+                            </div>    
+                            <div>
+                                <div>
+                                    <div>熱黑糖拿鐵
+                                    </div>
+                                </div>
+                                <div>
+                                    <span>
+                                        中 (360 毫升)
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                    
+                        <li class="d-flex">
+                            <div class="number border d-flex">1
+                            </div>    
+                            <div>
+                                <div>
+                                    <div>巴斯克乳酪蛋糕
+                                    </div>
+                                </div>
+                                <div>
+                                    <span>
+                                        中 (360 毫升)
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="sample">
+                            <div class="number border d-flex">1
+                            </div>    
+                            <div>
+                                <div>
+                                    <div>珍珠奶茶
+                                    </div>
+                                </div>
+                                <div>
+                                    <span>
+                                        無糖去冰
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="d-flex showContent mb-4">
+                        <span>顯示更多內容</span>
+                        <div class="iconDiv d-flex">
+                            <i class="fas fa-chevron-down icon mx-2"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="checkRes">
+                    <a href="#">檢視餐廳</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 d-flex historyItem my-4">
+                <div class="imgDiv">
+                    <img src="./FAKE1.jpeg">
+                </div>
+                <div class="itemGroup ml-2">
+                    <div>
+                        <a href="https://www.ubereats.com/tw/store/%E6%B5%B7%E5%A5%B3%E5%92%96%E5%95%A1-%E6%A5%A0%E6%A2%93%E5%BA%97/bKsuO4h6Q8GAHz4gQDn5Dg">海女咖啡 楠梓店</a>
+                    </div>
+                    <div class="itemTitle">
+                        4 份餐點，共 $0.00 • 8月23日 的 下午02:05 
+                    </div>
+                    <ul>
+                        <li class="d-flex">
+                            <div class="number border d-flex">1
+                            </div>    
+                            <div>
+                                <div>
+                                    <div>甜澄茉莉咖啡
+                                    </div>
+                                </div>
+                                <div>
+                                    <span>
+                                        中 (360 毫升)
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="d-flex">
+                            <div class="number border d-flex">1
+                            </div>    
+                            <div>
+                                <div>
+                                    <div>舒芙蕾
+                                    </div>
+                                </div>
+                            <div>
+                                <span>
+                                    原味蜂蜜 • 不要伊思尼鮮奶油
+                                </span>
+                            </div>
+                        </div>
+
+                        </li>
+                        <li class="d-flex">
+                            <div class="number border d-flex">1
+                            </div>    
+                            <div>
+                                <div>
+                                    <div>熱黑糖拿鐵
+                                    </div>
+                                </div>
+                                <div>
+                                    <span>
+                                        中 (360 毫升)
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                    
+                        <li class="d-flex">
+                            <div class="number border d-flex">1
+                            </div>    
+                            <div>
+                                <div>
+                                    <div>巴斯克乳酪蛋糕
+                                    </div>
+                                </div>
+                                <div>
+                                    <span>
+                                        中 (360 毫升)
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="d-flex sample">
+                            <div class="number border d-flex">1
+                            </div>    
+                            <div>
+                                <div>
+                                    <div>珍珠奶茶
+                                    </div>
+                                </div>
+                                <div>
+                                    <span>
+                                        無糖去冰
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="d-flex showContent mb-4">
+                        <span>顯示更多內容</span>
+                        <div class="iconDiv d-flex">
+                            <i class="fas fa-chevron-down icon mx-2"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="checkRes">
+                    <a href="#">檢視餐廳</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 historyItemSample">
+                <div class="imgDiv">
+                    <img src="./FAKE1.jpeg">
+                </div>
+                <div class="itemGroup ml-2">
+                    <div>
+                        <a href="https://www.ubereats.com/tw/store/%E6%B5%B7%E5%A5%B3%E5%92%96%E5%95%A1-%E6%A5%A0%E6%A2%93%E5%BA%97/bKsuO4h6Q8GAHz4gQDn5Dg">給你送滷肉飯 忠孝新生店</a>
+                    </div>
+                    <div class="itemTitle">
+                        4 份餐點，共 $0.00 • 8月23日 的 下午02:05 
+                    </div>
+                    <ul>
+                        <li class="d-flex">
+                            <div class="number border d-flex">1
+                            </div>    
+                            <div>
+                                <div>
+                                    <div>甜澄茉莉咖啡
+                                    </div>
+                                </div>
+                                <div>
+                                    <span>
+                                        中 (360 毫升)
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="d-flex">
+                            <div class="number border d-flex">1
+                            </div>    
+                            <div>
+                                <div>
+                                    <div>舒芙蕾
+                                    </div>
+                                </div>
+                            <div>
+                                <span>
+                                    原味蜂蜜 • 不要伊思尼鮮奶油
+                                </span>
+                            </div>
+                        </div>
+
+                        </li>
+                        <li class="d-flex">
+                            <div class="number border d-flex">1
+                            </div>    
+                            <div>
+                                <div>
+                                    <div>熱黑糖拿鐵
+                                    </div>
+                                </div>
+                                <div>
+                                    <span>
+                                        中 (360 毫升)
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                    
+                        <li class="d-flex">
+                            <div class="number border d-flex">1
+                            </div>    
+                            <div>
+                                <div>
+                                    <div>巴斯克乳酪蛋糕
+                                    </div>
+                                </div>
+                                <div>
+                                    <span>
+                                        中 (360 毫升)
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="sample">
+                            <div class="number border d-flex">1
+                            </div>    
+                            <div>
+                                <div>
+                                    <div>珍珠奶茶
+                                    </div>
+                                </div>
+                                <div>
+                                    <span>
+                                        無糖去冰
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="d-flex showContent mb-4">
+                        <span>顯示更多內容</span>
+                        <div class="iconDiv d-flex">
+                            <i class="fas fa-chevron-down icon mx-2"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="checkResSample">
+                    <a href="#">檢視餐廳</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 col-sm-12">
+                <div class="d-flex my-4 showRestaurant">
+                    <button type="button" class="btn btn-lg rounded-0 d-flex">
+                    <span>顯示更多內容</span> 
+                    </button>
+                </div>
+            </div>    
+        </div>
+    </div>
+
+    
+        <script>
+            let showIcon = document.querySelector('.iconDiv')
+            let showContent = document.querySelector('.showContent')
+            let sample = document.querySelector('.sample')
+            showIcon.addEventListener('click', function(){
+                    if(showContent.style.display == 'flex'){
+                        showContent.style.display = 'none'
+                        showIcon.style.display = 'none'
+                        sample.style.display = 'flex'
+                    }
+                    else{
+                        showContent.style.display = 'flex'
+                        showIcon.style.display = 'flex'
+                        sample.style.display = 'none'
+                    }
+                }) 
+            let showRestaurant = document.querySelector('.showRestaurant')    
+            let historyItemSample = document.querySelector('.historyItemSample')
+            showRestaurant.addEventListener('click', function(){
+                historyItemSample.style.display = 'flex'
+            })
+
+
+
+
+
+
+        </script>
+
+
+    
+</body>
+</html>
