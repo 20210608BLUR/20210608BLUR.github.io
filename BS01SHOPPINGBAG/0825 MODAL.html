@@ -40,6 +40,7 @@
         .selectList{
             display: flex;
             justify-content: space-between;
+            padding-bottom: 15px;
         }
         a{
             color: black;
@@ -62,6 +63,23 @@
             margin-right:10px ;
         }
         .otherItems div{
+            width: 200px;
+            margin-left: 20px;
+        }
+        .plasticBag{
+            background-color: rgb(238, 238, 238);
+            height: 54px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: auto;
+            font-size: 18px;
+            line-height: 20px;
+        }
+        .plasticBag input{
+            margin-right:10px ;
+        }
+        .plasticBag div{
             width: 200px;
             margin-left: 20px;
         }
@@ -143,9 +161,13 @@
                         <div id="firstPrice">$99元
                         </div>
                     </div>
-                    <div class="otherItems my-2">
+                    <div class="otherItems">
                         <label for="checkbox" class="w-100"><div>索取餐具、吸管等用品</div></label>
                         <input type="checkbox" id= "checkbox"  style="zoom:180%">
+                    </div>
+                    <div class="plasticBag my-2">
+                        <label for="checkbox2" class="w-100"><div>索取袋子</div></label>
+                        <input type="checkbox" id= "checkbox2"  style="zoom:180%">
                     </div>
                     <div class="previewOrderDiv"><button class="previewOrderBtn" >
                         <span class="previewOrderSpan">前往結帳 • $99.00</span></button>

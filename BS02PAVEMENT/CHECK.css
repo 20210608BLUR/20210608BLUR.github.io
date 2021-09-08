@@ -101,7 +101,31 @@ select{
 .otherItems label{
     margin: 15px;
 }
-.order{
+.a{
+    background-color: rgb(246, 246, 246);
+    width: auto;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+}
+.plasticBag{
+    background-color: rgb(246, 246, 246);
+    width: auto;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+}
+.plasticBag input{
+    margin:15px;
+}
+.plasticBag label{
+    margin: 15px;
+}
+.finallyOrder{
     background-color: rgb(175, 175, 175);
     border: 0px;
     width:600px;
