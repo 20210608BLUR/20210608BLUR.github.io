@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <script src="https://kit.fontawesome.com/4f9a2aa392.js" crossorigin="anonymous"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script src="https://kit.fontawesome.com/4f9a2aa392.js" crossorigin="anonymous"></script>
@@ -9,16 +10,22 @@
         body{
             font-family: sans-serif;
         }
+        .container-fluid {
+            max-width: 1920px;
+        }
         nav{
             height: 80px;
             width: auto;
             background-color: white;
             position: fixed;
         }
+        .passOrder{
+            font-size: 24px;
+        }
         .imgDiv{
-            width: 302px;
+            width: 100%;
             height: 140px;
-            padding-right: 24px;
+            padding-right: 0px;
         }
         img{
             width: 100%;
@@ -27,10 +34,13 @@
         .historyItem{
             border-bottom: 1px solid rgb(238, 238, 238);
         }
+        .historyStore a {
+            font-weight: bolder;
+        }
         .historyItem a {
             text-decoration: none;
             color: black;
-            font-size: 20px;
+            font-size: 18px;
         }
         .number{
             margin-right: 16px;
@@ -38,19 +48,19 @@
             line-height: 20px;
         }
         .itemTitle{
-            font-size: 14px;
-            margin: 4px;
+            font-size: 12px;
+            margin-top: 8px;
         }
         .itemGroup{
             flex-grow: 1;
             padding-right: 24px;
         }
         .itemGroup span{
-            font-size: 14px;
+            font-size: 12px;
         } 
         .checkRes{
             background-color: black;
-            width: 302px;
+            width: 100%;
             height: 56px;
             display: flex;
             justify-content: center; 
@@ -69,6 +79,7 @@
         li{
             list-style: none;
             margin-top: 16px;
+            font-size: 14px;
         }
         .number{
             height: 24px;
@@ -80,43 +91,43 @@
             justify-content: center;
             align-items: center;
         }
-        .showContent{
-            display: flex;
-        }
-        .showContent span{
-            font-size: 16px;
-        }
         .historyStore{
-            justify-content: space-between;
+            margin-top: 8px;
         }
-        .historyItem{
-            display: flex;
+        .historyStore a{
+            padding-right: 10px;
         }
+        .historyStore i {
+            color: rgb(255, 192, 67);
+            font-size: 10px;
+        }        
         .sample{
             display: none;
         }
         .showIcon{
             display: flex;
         }
-        .showRestaurant{
-            justify-content: center;
+        .showContent span{
+            font-size: 14px;
+        }
+        .itemTitle{
+            display: flex;
+            flex-direction: row;
             align-items: center;
         }
-        .showRestaurant button{
-            background-color: black;
+        .showRestaurant{
+            display: none;
         }
+        /* .showRestaurant button{
+            display: none;
+            background-color: black;
+            height: 56px;
+            justify-content: center;
+            align-items: center;
+        } */
         .showRestaurant span{
             color: white;
             font-size: 18px;
-        }
-        .historyItemSample{
-            display: none;
-            border-bottom: 1px solid rgb(238, 238, 238);
-        }
-        .historyItemSample a {
-            text-decoration: none;
-            color: black;
-            font-size: 20px;
         }
         .checkResSample{
             background-color: black;
@@ -131,6 +142,139 @@
             display: block;
             text-align: center;
             width: 100%;
+        }
+        .shippingAddressDiv{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .shippingAddressDiv div{
+            font-weight: bolder;
+            font-size: 16px;
+        }
+        .shippingAddressGroup span{
+            font-size: 14px;
+        }
+        .shippingAddressGroup{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 40px;
+        }
+        .iBackground{
+            background-color: rgb(255,205,0);
+            height: 30px;
+            width: 30px;
+            border-radius: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .fas.fa-search{
+            font-size: 12px;
+        }
+
+        /* 桌機 */
+        @media screen and (min-width: 992px){
+            .historyItem{
+                display: flex;
+                border-bottom: 1px solid rgb(238, 238, 238);
+                padding-left: 0px;
+                padding-right: 0px; 
+            }
+            .imgDiv{
+                width: 302px;
+                height: 140px;
+                padding-right: 24px;
+            }
+            img{
+                width: 100%;
+                height: 100%;
+            }
+            ul{
+                padding-left: 0px;
+                margin-top: 16px;
+            }
+            li{
+                list-style: none;
+                margin-top: 16px;
+                font-size: 16px;
+            }
+            .itemTitle{
+                font-size: 14px;
+                margin: 4px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+            }
+            .itemTitlePrice{
+                font-size: 18px;
+            }
+            .historyStore{
+                margin-top: 0px;  
+                justify-content: space-between;
+            }
+            .historyStore a {
+                font-size:20px;
+            }
+            .historyStore i {
+                color: rgb(255, 192, 67);
+                font-size: 16px;
+            }
+            .itemGroup{
+                flex-grow: 1;
+                padding-right: 24px;
+            }
+            .itemGroup span{
+                font-size: 14px;
+            } 
+            .number{
+                height: 24px;
+                width: 24px;
+                justify-content: center;
+                text-align: center;
+                font-size: 16px;
+            }
+            .checkRes{
+                background-color: black;
+                width: 302px;
+                height: 56px;
+                display: flex;
+                justify-content: center; 
+                align-items: center;
+            }
+            .checkRes a {
+                color: white;
+                display: block;
+                text-align: center;
+                width: 100%;
+            }
+            .showContent span{
+                font-size: 16px;
+            }
+            .showRestaurant{
+                justify-content: center;
+                align-items: center;
+            }
+            .showRestaurant button{
+                background-color: black;
+                width: auto;
+            }
+            .showRestaurant span{
+                color: white;
+                font-size: 18px;
+                width: 140px;
+            }
+            .shippingAddressDiv{
+                display: none;
+            }
+            .shippingAddressGroup{
+                display: none;
+            }
+            .passOrder{
+            font-size: 36px;
+            }
+        
         }
         
     </style>
@@ -147,21 +291,42 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 col-sm-12 mb-4">
-                <h1 class="font-weight-bold">過去的訂單</h1>
+            <div class="col-12 shippingAddressGroup">
+                <div>
+                    <span>立即外送</span>
+                    <div class="shippingAddressDiv">
+                        <div>忠孝東路三段</div><i class="fas fa-chevron-down icon mx-2"></i>
+                    </div>
+                </div>
+                <div class="iBackground"><i class="fas fa-search"></i></div>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12 col-sm-12 d-flex historyItem">
+            <div class="col-12 mb-4">
+                <h1 class="font-weight-bold passOrder">過去的訂單</h1>
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-12 historyItem mb-3">
                 <div class="imgDiv">
                     <img src="./FAKE1.jpeg">
                 </div>
                 <div class="itemGroup ml-2">
                     <div class="historyStore d-flex">
                         <a href="https://www.ubereats.com/tw/store/%E6%B5%B7%E5%A5%B3%E5%92%96%E5%95%A1-%E6%A5%A0%E6%A2%93%E5%BA%97/bKsuO4h6Q8GAHz4gQDn5Dg">海女咖啡 楠梓店</a>
+                        <div>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
                     </div>
-                    <div class="itemTitle">
-                        4 份餐點，共 $0.00 • 8月23日 的 下午02:05 
+                    <div class="itemTitleDiv">
+                        <div class="itemTitle ">
+                            4 份餐點，共 <div class="itemTitlePrice mx-1">$0.00</div> • 8月23日 的 下午02:05
+                        </div>
                     </div>
                     <ul>
                         <li class="d-flex">
@@ -258,16 +423,18 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12 col-sm-12 d-flex historyItem my-4">
+            <div class="col-12 historyItem mb-3">
                 <div class="imgDiv">
                     <img src="./FAKE1.jpeg">
                 </div>
-                <div class="itemGroup mr-4">
-                    <div>
+                <div class="itemGroup ml-2">
+                    <div class="historyStore">
                         <a href="https://www.ubereats.com/tw/store/%E6%B5%B7%E5%A5%B3%E5%92%96%E5%95%A1-%E6%A5%A0%E6%A2%93%E5%BA%97/bKsuO4h6Q8GAHz4gQDn5Dg">海女咖啡 楠梓店</a>
                     </div>
-                    <div class="itemTitle">
-                        4 份餐點，共 $0.00 • 8月23日 的 下午02:05 
+                    <div class="itemTitleDiv">
+                        <div class="itemTitle ">
+                            4 份餐點，共 <div class="itemTitlePrice mx-1">$0.00</div> • 8月23日 的 下午02:05
+                        </div>
                     </div>
                     <ul>
                         <li class="d-flex">
@@ -364,16 +531,18 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12 col-sm-12 historyItemSample">
+            <div class="col-12 col-md-12 historyItem">
                 <div class="imgDiv">
                     <img src="./FAKE1.jpeg">
                 </div>
                 <div class="itemGroup ml-2">
-                    <div>
-                        <a href="https://www.ubereats.com/tw/store/%E6%B5%B7%E5%A5%B3%E5%92%96%E5%95%A1-%E6%A5%A0%E6%A2%93%E5%BA%97/bKsuO4h6Q8GAHz4gQDn5Dg">給你送滷肉飯 忠孝新生店</a>
+                    <div class="historyStore">
+                        <a href="https://www.ubereats.com/tw/store/%E6%B5%B7%E5%A5%B3%E5%92%96%E5%95%A1-%E6%A5%A0%E6%A2%93%E5%BA%97/bKsuO4h6Q8GAHz4gQDn5Dg">BS滷肉飯 忠孝復興店</a>
                     </div>
-                    <div class="itemTitle">
-                        4 份餐點，共 $0.00 • 8月23日 的 下午02:05 
+                    <div class="itemTitleDiv">
+                        <div class="itemTitle ">
+                            4 份餐點，共 <div class="itemTitlePrice mx-1">$0.00</div> • 8月23日 的 下午02:05
+                        </div>
                     </div>
                     <ul>
                         <li class="d-flex">
@@ -440,7 +609,7 @@
                             </div>
                         </li>
 
-                        <li class="sample">
+                        <li class="d-flex sample">
                             <div class="number border d-flex">1
                             </div>    
                             <div>
@@ -464,7 +633,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="checkResSample">
+                <div class="checkRes">
                     <a href="#">檢視餐廳</a>
                 </div>
             </div>
@@ -473,7 +642,7 @@
         <div class="row">
             <div class="col-lg-12 col-sm-12">
                 <div class="d-flex my-4 showRestaurant">
-                    <button type="button" class="btn btn-lg rounded-0 d-flex">
+                    <button type="button" class="btn btn-lg btn-block rounded-0 d-flex">
                     <span>顯示更多內容</span> 
                     </button>
                 </div>
@@ -499,10 +668,12 @@
                     }
                 }) 
             let showRestaurant = document.querySelector('.showRestaurant')    
-            let historyItemSample = document.querySelector('.historyItemSample')
-            showRestaurant.addEventListener('click', function(){
-                historyItemSample.style.display = 'flex'
-            })
+            let historyItemSample = document.querySelector('#historyItemSample')
+            // 延遲載入
+                        
+            
+
+
 
         </script>
 
