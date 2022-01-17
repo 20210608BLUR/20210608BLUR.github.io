@@ -1,0 +1,63 @@
+<body>
+    <h1>寶可夢圖鑑列表</h1>
+    <button id='btn1' onclick='fetchPokemon()'>載入寶可夢圖鑑列表</button>
+    <button id='btn2' onclick='fetchPokemon_appendChild()'>載入寶可夢圖鑑列表appendChild()</button>
+    
+    <div id='container'></div>
+    
+
+    <script>
+        
+        let container = document.getElementById('container');
+        //用DOM加入一張圖片
+        window.onload = pokemon()
+        function pokemon(){
+            let img = document.createElement('img');
+            img.setAttribute('src', 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/888.png')
+
+            container.appendChild(img);
+        }
+        //用JS在HTML元素屬性設定事件
+        let btn1 = document.getElementById('btn1');
+        let img1 = document.querySelector('#container');
+        window.onload = function(){
+            btn1.onclick(fetchPokemon)
+        }
+        function fetchPokemon(){
+            container.innerHTML = "";
+            let pokemons = ""
+
+            for(let i=1; i<890; i++){
+                let fileName = i.toString().padStart(3,"0");
+                let pathFile = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${fileName}.png`
+                let pokemonImg = `<img src ='${pathFile}'>`
+                pokemons+=pokemonImg
+            }
+            img1.innerHTML = pokemons;
+
+        }
+        
+        //用addEventListener
+        let btn2 = document.getElementById('btn2');
+        let img2 = document.querySelector('#container');
+
+        window.onload = function(){
+            btn2.addEventListener("click", fetchPokemon_appendChild);
+        }
+        function fetchPokemon_appendChild(){
+            container.innerHTML = "";
+            let pokemons = ""
+
+            for(let i=1; i<890; i++){
+                let fileName = i.toString().padStart(3,"0");
+                let pathFile = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${fileName}.png`
+                let pokemonImg = `<img src ='${pathFile}'>`
+                pokemons+=pokemonImg
+            }
+            img2.innerHTML = pokemons;
+        }
+    
+    </script>
+</body>
+
+</html>
