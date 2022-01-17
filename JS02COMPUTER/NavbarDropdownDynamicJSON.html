@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a,
+        .dropbtn {
+            display: inline-block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover,
+        .dropdown:hover .dropbtn {
+            background-color: red;
+        }
+
+        li.dropdown {
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li class="dropdown">
+            <a href="#" class="dropbtn">品牌主機</a>
+            <div class="dropdown-content" id="pc">
+                
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">電腦零件</a>
+            <div class="dropdown-content" id="parts">
+                
+            </div>
+        </li>
+    </ul>
+
+
+
+    <script>
+        //宣告一個 JSON 路徑
+        let url = 'https://raw.githubusercontent.com/20210608BLUR/FileStorage/main/Computer.json'
+        //宣告 JSON 裡面的物件
+        let pcArray, partsArray;
+
+        // const pcArray = [
+        //     { pc: "華碩", url: "https://www.asus.com" },
+        //     { pc: "技嘉", url: "https://www.gigabyte.com" },
+        //     { pc: "微星", url: "https://tw.msi.com" },
+        // ];
+
+        // const partsArray = [
+        //     { parts: "CPU", url: "https://24h.pchome.com.tw/region/DRAI" },
+        //     { parts: "GPU", url: "https://24h.pchome.com.tw/region/DRAD" },
+        //     { parts: "SSD", url: "https://24h.pchome.com.tw/region/DRAH" },
+        // ];
+
+        //改版成動態加入DOM節點
+        let pcMenu, partsMenu;
+        let pcMenu1, partMenu1 
+        window.onload = function () {
+            //用 fetch 加入 JSON
+            fetch(url)
+            .then(response => response.json())
+            .then(result => {
+                console.log(typeof result);
+                
+                pcArray = result.Pc;
+                partsArray = result.Parts;
+
+                console.log(pcArray);
+                console.log(partsArray);
+
+                
+                // 把 a 的 foreach 放進呼叫 JSON 裡面
+                pcMenu1 = document.querySelectorAll('#pc a')
+                console.log(pcMenu1)
+                pcMenu1.forEach((item, index)=>{
+                    item.innerText = pcArray[index].pc;
+                    item.setAttribute('href',pcArray[index].url)
+                })
+
+                partsMenu1 = document.querySelectorAll('#parts a')
+                console.log(partsMenu1)
+                partsMenu1.forEach((item, index)=>{
+                    item.innerText = partsArray[index].parts;
+                    item.setAttribute('href', partsArray[index].url)
+                })
+            })
+            .catch(ex => {})
+            .finally(() => {});   
+            
+            //設動態節點
+            let pc1= document.getElementById('pc') 
+            for(let i= 0; i< 3; i++){
+                let pcMenu = document.createElement('a');
+                pc1.appendChild(pcMenu); 
+            }
+            console.log(pcMenu)
+
+            let parts1= document.getElementById('parts')
+            for(let i= 0 ; i<3; i++){
+                let partsMenu = document.createElement('a')
+                parts1.appendChild(partsMenu);
+            } 
+        }
+
+    </script>
+</body>
+</html>
