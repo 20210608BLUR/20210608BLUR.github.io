@@ -1,0 +1,272 @@
+﻿<template id="app">
+    <b-container fluid>
+        <!-- User Interface controls -->
+        <b-row>
+            <div class="col-12">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/Home/Index" target="_self" class="">首頁</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        <span aria-current="location">餐廳會員查詢</span>
+                    </li>
+                </ol>
+            </div>
+
+            <b-col lg="12" class="my-1">
+                <b-form-group v-model="sortDirection"
+                              label="篩選項目"
+                              description="針對欲查詢的項目做勾選"
+                              label-cols-sm="3"
+                              label-align-sm="left"
+                              label-size="sm"
+                              class="mb-0"
+                              v-slot="{ ariaDescribedby }">
+                    <b-form-checkbox-group v-model="filterOn"
+                                           :aria-describedby="ariaDescribedby"
+                                           class="mt-1">
+                        <b-form-checkbox value="restaurantId">餐廳編號</b-form-checkbox>
+                        <b-form-checkbox value="restaurantName">餐廳名稱</b-form-checkbox>
+                        <b-form-checkbox value="auditStatus">審核狀態</b-form-checkbox>
+                    </b-form-checkbox-group>
+                </b-form-group>
+            </b-col>
+            <b-col lg="6" class="my-1 addStoreLink">
+                <a href="/Store/AddStore">
+                    <b-button-group>
+                        <b-button variant="success">
+                            <b-icon icon="plus-square" aria-hidden="true"></b-icon>
+                            新增餐廳
+                        </b-button>
+                    </b-button-group>
+                </a>
+            </b-col>
+            <b-col lg="6" class="my-1">
+                <b-form-group label="關鍵字搜尋"
+                              label-for="filter-input"
+                              label-cols-sm="3"
+                              label-align-sm="left"
+                              label-size="sm"
+                              class="mb-0">
+                    <b-input-group size="sm">
+                        <b-form-input id="filter-input"
+                                      v-model="filter"
+                                      type="search"
+                                      placeholder="請輸入關鍵字"></b-form-input>
+
+                        <b-input-group-append>
+                            <b-button :disabled="!filter" v-on:click="filter = ''">Clear</b-button>
+                        </b-input-group-append>
+                    </b-input-group>
+                </b-form-group>
+            </b-col>
+        </b-row>
+
+        <!-- Main table element -->
+        <b-table :items="items"
+                 :fields="fields"
+                 :current-page="currentPage"
+                 :per-page="perPage"
+                 :filter="filter"
+                 :filter-included-fields="filterOn"
+                 :sort-by.sync="sortBy"
+                 :sort-desc.sync="sortDesc"
+                 :sort-direction="sortDirection"
+                 stacked="md"
+                 show-empty
+                 small
+                 filtered="onFiltered">
+            <template #cell(name)="row">
+                {{ row.value.first }} {{ row.value.last }}
+            </template>
+
+            <template #cell(UpdateStoreAuditStatus)="row">
+                <div v-if="row.item.storeAuditStatus==0">
+                    <b-button size="sm" class="mr-1" variant="success" v-on:click="IsAcceptStoreAuditStatus(row.item.memberId,true)">核准</b-button>
+                    <b-button size="sm" class="mr-1" variant="danger" v-on:click="IsAcceptStoreAuditStatus(row.item.memberId,false)">拒絕</b-button>
+                </div>
+                <b-button size="sm" v-else class="mr-1" disabled>已確認</b-button>
+            </template>
+
+            <template #cell(actions)="row">
+                <b-button size="sm" v-on:click="row.toggleDetails">
+                    {{ row.detailsShowing ? '關閉詳細':'展開詳細' }}
+                </b-button>
+            </template>
+
+            <template #row-details="row">
+                <b-card>
+                    <div class="d-flex">
+                        <div class="col-6">
+                            <p>餐廳會員編號:{{row.item.restaurantId}}</p>
+                            <p>一般會員編號:{{row.item.memberId}}</p>
+                            <p>餐廳名稱:{{row.item.restaurantName}}</p>
+                        </div>
+                        <div class="col-6">
+                            <p>會員名稱:{{row.item.lastName}}{{row.item.firstName}}</p>
+                            <p>餐廳會員:{{row.item.isStore?'是':'否'}}</p>
+                        </div>
+                    </div>
+                </b-card>
+            </template>
+        </b-table>
+
+        <!-- Info modal -->
+        <b-modal :id="infoModal.id" :title="infoModal.title" ok-only hide="resetInfoModal">
+            <pre>{{ infoModal.content }}</pre>
+        </b-modal>
+
+        <b-row>
+
+            <b-col sm="7" md="6" class="ml-auto">
+                <b-pagination v-model="currentPage"
+                              :total-rows="totalRows"
+                              :per-page="perPage"
+                              align="fill"
+                              size="sm"
+                              class="my-0"></b-pagination>
+            </b-col>
+
+
+            <b-col sm="5" lg="3" class="my-1">
+                <b-form-group label="每頁顯示筆數"
+                              label-for="per-page-select"
+                              label-cols-sm="3"
+                               content-cols="3"
+                              label-cols-lg="9"
+                              label-align-sm="right"
+                              label-size="sm"
+                              class="mb-0">
+                    <b-form-select id="per-page-select"
+                                   v-model="perPage"
+                                   :options="pageOptions"
+                                   size="sm"></b-form-select>
+                </b-form-group>
+            </b-col>
+
+        </b-row>
+    </b-container>
+</template>
+
+@section topCSS
+{
+    <style>
+        .addStoreLink a{
+            text-decoration:none;
+        }
+    </style>
+}
+
+@section endJS{
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    items: [],
+                    fields: [
+                        { key: 'restaurantId', label: '餐廳編號', sortable: true, sortDirection: 'desc', class: 'text-center' },
+                        { key: 'restaurantName', label: '餐廳名稱', sortable: true, class: 'text-center' },
+                        { key: 'actions', label: '查看', class: 'text-center' },
+                        {
+                            key: 'storeAuditStatus',
+                            label: '審核狀態',
+                            formatter: (value, key, item) => {
+                                if (value == -99) value = '非餐廳會員'
+                                if (value == -1) value = '拒絕'
+                                if (value == 0) value = '待審核'
+                                if (value == 1) value = '審核完成'
+
+                                return value;
+                            },
+                            sortable: true,
+                            class: 'text-center',
+                            sortByFormatted: true,
+                            filterByFormatted: true
+                        },
+                        { key: 'UpdateStoreAuditStatus', label: '審核結果', class: 'text-center' },
+
+                    ],
+                    totalRows: 1,
+                    currentPage: 1,
+                    perPage: 5,
+                    pageOptions: [5, 10, 15, { value: 100, text: "全部" }],
+                    sortBy: '',
+                    sortDesc: false,
+                    sortDirection: 'asc',
+                    filter: null,
+                    filterOn: [],
+                    infoModal: {
+                        id: 'info-modal',
+                        title: '',
+                        content: ''
+                    }
+                }
+            },
+            created() {
+                this.GetAllRestaurantMembers()
+            },
+            computed: {
+                sortOptions() {
+                    // Create an options list from our fields
+                    return this.fields
+                        .filter(f => f.sortable)
+                        .map(f => {
+                            return { text: f.label, value: f.key }
+                        })
+                }
+            },
+            mounted() {
+                // Set the initial number of items
+            },
+            methods: {
+                info(item, index, button) {
+                    this.infoModal.title = `Row index: ${index}`
+                    this.infoModal.content = JSON.stringify(item, null, 2)
+                    this.$root.$emit('bv::show::modal', this.infoModal.id, button)
+                },
+                resetInfoModal() {
+                    this.infoModal.title = ''
+                    this.infoModal.content = ''
+                },
+                onFiltered(filteredItems) {
+                    // Trigger pagination to update the number of buttons/pages due to filtering
+                    this.totalRows = filteredItems.length
+                    this.currentPage = 1
+                },
+                GetAllRestaurantMembers() {                   
+                    $.ajax({
+                        type: 'GET',
+                        url: '/api/Member/GetAllRestaurantMembers',
+                        contentType: "application/json; charset=utf-8",                       
+                        success: function (res) {
+                            console.log(res);
+                            app.items = res.result;
+                            app.totalRows = app.items.length
+                        }
+                    });
+
+                },
+                IsAcceptStoreAuditStatus(item, isAccept) {
+                    axios.post('/api/Member/IsAcceptStoreAuditStatus', {
+                        memberId: item,
+                        IsAccept: isAccept
+                    })
+                        .then(res => {
+                            if (res.data.isSuccess == true) {
+                                app.GetAllRestaurantMembers();
+                                alert('修改成功');
+                            }
+                            else {
+                                throw new UserException('Unknown Error');
+                            }
+                        })
+                        .catch(ex => {
+                            this.IsSuccess = false;
+                            this.Exception = ex.toString();
+                        })
+                },              
+            }
+        });
+    </script>
+}

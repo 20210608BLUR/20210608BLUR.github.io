@@ -1,0 +1,472 @@
+﻿<div id="contain">
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+        <main role="main" class="pb-3">
+            <!-- Page Heading -->
+            <!-- Content Row -->
+            <div id="dashboard" v-cloak>
+                <div>
+                    <div class="row">
+                        <!-- Content Column -->
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="cardBorder card text-white shadow">
+                                <div class="card-body" style="background-color: #00916E ">
+                                    店家總數
+                                    <div class=" d-flex justify-content-end align-items-end">
+                                        <div class="text-white h1 mb-0">{{dashboardInfo.storeTotal}}</div>
+                                        <div class="text-white">/筆</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="cardBorder card  text-white shadow ">
+                                <div class="card-body" style="background-color: #5386E4 ">
+                                    訂單總數
+                                    <div class=" d-flex justify-content-end align-items-end">
+                                        <div class="text-white h1 mb-0">{{dashboardInfo.orderTotal}}</div>
+
+                                        <div class="text-white">/筆</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="cardBorder card  text-white shadow ">
+                                <div class="card-body" style="background-color: #FFCF00 ">
+                                    會員總數
+                                    <div class=" d-flex justify-content-end align-items-end">
+                                        <div class="text-white h1 mb-0">{{dashboardInfo.memberTotal}}</div>
+
+                                        <div class="text-white">/筆</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="cardBorder card  text-white shadow ">
+                                <div class="card-body" style="background-color: #EE6123 ">
+                                    優惠券使用總數
+                                    <div class=" d-flex justify-content-end align-items-end">
+                                        <div class="text-white h1 mb-0">{{dashboardInfo.discountTotal}}</div>
+
+                                        <div class="text-white">/筆</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- Content Row -->
+                    <div class="row">
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2  ">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                收益 (本月)
+                                            </div>
+                                            <div class="h4 mb-0 font-weight-bold text-gray-800">
+                                                NT${{dashboardInfo.earningMonthTotal}}
+                                            </div>
+
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                收益 (年度)
+                                            </div>
+                                            <div class="h4 mb-0 font-weight-bold text-gray-800">
+                                                NT${{dashboardInfo.earningYearTotal}}
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                訂單數 (本月)
+                                            </div>
+
+                                            <div class="h4 mb-0 font-weight-bold text-gray-800">
+                                                {{dashboardInfo.orderMonthTotal}}
+                                                <span class="small"> /筆</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pending Requests Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                訂單數 (年度)
+                                            </div>
+                                            <div class="h4 mb-0 font-weight-bold text-gray-800">
+                                                {{dashboardInfo.orderYearTotal}}
+                                                <span class="small"> /筆</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Content Row -->
+
+                <div class="row">
+
+                    <!-- Area Chart -->
+                    <div class="col-xl-12 ">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">近12個月營收</h6>
+                                @*<div class="dropdown no-arrow">
+                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                         aria-labelledby="dropdownMenuLink">
+                                        <div class="dropdown-header">Dropdown Header:</div>
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                    </div>
+                                </div>*@
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <div class="chart-area">
+                                    <canvas id="myAreaChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-xl-8 col-lg-7">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">Top5熱門商店</h6>
+                            </div>
+                            <template>
+                                <div>
+                                    <b-table striped hover :items="topStoreTable.items" :fields="topStoreTable.fields"></b-table>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                    <!-- Pie Chart -->
+                    <div class="col-xl-4 col-lg-5">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">店家種類分佈</h6>
+                                @*<div class="dropdown no-arrow">
+                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                         aria-labelledby="dropdownMenuLink">
+                                        <div class="dropdown-header">Dropdown Header:</div>
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                    </div>
+                                </div>*@
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <div class="chart-pie pt-4 pb-2">
+                                    <canvas id="myPieChart"></canvas>
+                                </div>
+                                <div class="mt-4 text-center small">
+                                    <span class="mr-2">
+                                        <i class="fas fa-circle " style="color:#FFC20E"></i>一般會員
+                                    </span>
+                                    <span class="mr-2">
+                                        <i class="fas fa-circle " style="color:#482728"></i>送送會員
+                                    </span>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="sticky-footer bg-white">
+    <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+            <span>
+                &copy; 2021 - HolyShongAdmin -
+            </span>
+        </div>
+    </div>
+</footer>
+
+@section topJs{
+    <script src="~/js/Common.js"></script>
+    <script src="~/js/statecheck.js"></script>
+    <script>
+        if (localStorage.getItem('accessToken') == null) {
+            window.location.href = '/login/index';
+        }
+    </script>
+}
+
+@section topCSS{
+    @*<style>
+        .cardBorder {
+            border: 2px solid rgb(105, 114, 104);
+        }
+    </style>*@
+}
+@section endJs{
+    <script>
+        let app = new Vue({
+            el: '#dashboard',
+            data: {
+                dashboardInfo: [],
+                topStoreTable: {
+                    fields: [
+                        { key: 'index', label: '排名', class: 'text-center' },
+                        { key: 'storeName', label: '商品名稱' },
+                        { key: 'sell', label: '銷售額', class: 'text-center' },
+                        { key: 'sellNums', label: '銷售數', class: 'text-center' }
+                    ],
+                    items: [],
+                },
+                recentlyMonths: [],
+                earningInfo: [],
+                isVip: [],
+                vipNums: [],
+            },
+            created() {
+                this.getDashboardInfo();
+                this.anlsDashboardInfo();
+                this.setRevenueChart();
+                this.setVipPie();
+            },
+            methods: {
+                getDashboardInfo() {
+                    axios.get('/api/Dashboard/GetInfo')
+                        .then(res => {
+                            ;
+                            if (res.data.isSuccess == true) {
+                                this.dashboardInfo = res.data.result;
+                                this.isBusy = false;
+                            }
+                            else {
+                                console.log(res.data.exception)
+                            }
+                        });
+                },
+                anlsDashboardInfo() {
+                    axios.get('/api/Dashboard/AnlsInfo')
+                        .then(res => {
+                            if (res.data.isSuccess == true) {
+                                this.topStoreTable.items = res.data.result;
+                                this.isBusy = false;
+                            }
+                            else {
+                                console.log(res.data.exception)
+                            }
+                        });
+                },
+                setRevenueChart() {
+                    // 圖表
+                    axios.get('/api/Dashboard/EarningInfo').then(res => {
+                        // 圖表data
+                        this.earningInfo = res.data.result.earning;
+                        this.recentlyMonths = res.data.result.dateTimeMonths;
+                        const revenueCtx = document.querySelector('#myAreaChart');
+                        new Chart(revenueCtx, {
+                            type: 'line',
+                            data: {
+                                labels: this.recentlyMonths,
+                                datasets: [{
+                                    label: '每月營收',
+                                    lineTension: 0,
+                                    backgroundColor: "rgba(78, 115, 223, 0)",
+                                    borderColor: "rgba(78, 115, 223, 1)",
+                                    borderWidth: 2,
+                                    pointRadius: 2,
+                                    pointBackgroundColor: "rgba(78, 115, 223, 1)",
+                                    pointBorderColor: "rgba(78, 115, 223, 1)",
+                                    pointHoverRadius: 2,
+                                    pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+                                    pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+                                    pointHitRadius: 2,
+                                    pointBorderWidth: 4,
+                                    data: this.earningInfo,
+                                }],
+                            },
+                            options: {
+                                maintainAspectRatio: false,
+                                layout: {
+                                    padding: {
+                                        left: 10,
+                                        right: 25,
+                                        top: 25,
+                                        bottom: 0
+                                    }
+                                },
+                                scales: {
+                                    xAxes: [{
+                                        time: {
+                                            unit: 'date'
+                                        },
+                                        gridLines: {
+                                            display: false,
+                                            drawBorder: false
+                                        },
+                                        ticks: {
+                                            maxTicksLimit: 12
+                                        }
+                                    }],
+                                    yAxes: [{
+                                        ticks: {
+                                            maxTicksLimit: 5,
+                                            padding: 10,
+                                        },
+                                        gridLines: {
+                                            color: "rgb(234, 236, 244)",
+                                            zeroLineColor: "rgb(234, 236, 244)",
+                                            drawBorder: false,
+                                            borderDash: [2],
+                                            zeroLineBorderDash: [2]
+                                        }
+                                    }],
+                                },
+                                legend: {
+                                    display: false
+                                },
+                                tooltips: {
+                                    backgroundColor: "rgb(255,255,255)",
+                                    bodyFontColor: "#858796",
+                                    titleMarginBottom: 10,
+                                    titleFontColor: '#6e707e',
+                                    titleFontSize: 14,
+                                    borderColor: '#dddfeb',
+                                    borderWidth: 1,
+                                    xPadding: 15,
+                                    yPadding: 15,
+                                    displayColors: false,
+                                    intersect: false,
+                                    mode: 'index',
+                                    caretPadding: 10,
+                                }
+                            }
+                        })
+                    }).catch(err => console.log(err))
+                },
+                setVipPie() {
+                    axios.get('/api/Dashboard/VipInfo')
+                        .then(res => {
+                            if (res.data.isSuccess == true) {
+                                this.isVip = res.data.result.isVip;
+                                this.vipNums = res.data.result.vipNums;
+                                this.isBusy = false;
+                                console.log(this.vipNums);
+                                var ctx = document.getElementById("myPieChart");
+                                var myPieChart = new Chart(ctx, {
+                                    type: 'doughnut',
+                                    data: {
+                                        labels: this.isVip,//主分類
+                                        datasets: [{
+                                            data: this.vipNums,//數量
+                                            backgroundColor: ['#482728', '#FFC20E'],
+                                            //hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+                                            //hoverBorderColor: "rgba(234, 236, 244, 1)",
+                                        }],
+                                    },
+                                    options: {
+                                        maintainAspectRatio: false,
+                                        tooltips: {
+                                            backgroundColor: "rgb(255,255,255)",
+                                            bodyFontColor: "#858796",
+                                            borderColor: '#dddfeb',
+                                            borderWidth: 1,
+                                            xPadding: 15,
+                                            yPadding: 15,
+                                            displayColors: false,
+                                            caretPadding: 10,
+                                        },
+                                        legend: {
+                                            display: false
+                                        },
+                                        cutoutPercentage: 50,
+                                    },
+                                });
+                            }
+                            else {
+                                console.log(res.data.exception)
+                            }
+                        });
+                },
+                getRandomColor() {
+                    var letters = '0123456789ABCDEF'.split('');
+                    var color = '#';
+                    for (var i = 0; i < 6; i++) {
+                        color += letters[Math.floor(Math.random() * 16)];
+                    }
+                    return color;
+                },
+            },
+        });
+    </script>
+}
+

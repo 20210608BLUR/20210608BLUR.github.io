@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div id="app">
+        <input id="keyword" type="text" name="name" value="" />
+        <button class="btn" v-on:click="passKeyword">send</button>
+        <div>{{store.StoreName}}</div>
+        <div>{{store.StoreImg}}</div>
+        <div>{{store.StoreUrl}}</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.js"></script>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                store: {}
+            },
+            methods: {
+                passKeyword() {
+                    let inputWord = document.getElementById('keyword');
+                    let btn = document.querySelector('.btn');
+                    btn.addEventListener('click', function () {
+                        $.ajax({
+                            type: 'POST',
+                            url: '/api/Linebot/GetStoreByDescription',
+                            data: { des: inputWord.innerText },
+                            success: function (res) {
+                                console.log(res);
+                                app.data.store = res.Result;
+                            }
+                        });
+                    });
+                }
+            }
+        });
+    </script>
+
+
+</body>
+</html>
