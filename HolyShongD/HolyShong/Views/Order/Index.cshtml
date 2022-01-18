@@ -1,0 +1,310 @@
+﻿@model OrderDeliverViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <div class="d-flex">
+        <div class="info">
+            <div class="item d-flex justify-content-between">
+                <h2 class="time m-0">12:29</h2>
+                <div class="my-auto">預估等待時間</div>
+            </div>
+            <div class="item">
+                <div class="item-time">
+                    <div>訂單進度</div>
+                </div>
+                <div class="item-progress">
+                    <div class="progress my-3">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                             aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                @if (Model.OrderStatus >= 5)
+                {
+
+                    <div class="item-info">
+                        <div class="pb-2"> @Model.DeliverName 為您外送訂單餐點，訂單餐點送到您的門口時，您會收到通知</div>
+                    </div>
+                }
+            </div>
+            <div class="item">
+                <div id="map"></div>
+            </div>
+            @if (Model.OrderStatus >= 5)
+            {
+                <div class="item d-flex justify-content-between">
+                    <h4 class="my-auto">@Model.DeliverName 會騎摩托車前來</h4>
+                    <div>
+                        <img src="@Model.DeliverImg" class="rounded-circle">
+                    </div>
+                </div>
+            }
+            <div class="item">
+                <h4>外送詳細資訊</h4>
+                <div class="mb-2">@Model.RestaurantAddress</div>
+                <div>備註：@Model.CustomerNotes</div>
+            </div>
+            <div class="item">
+                <h4 class="m-0">訂單摘要</h4>
+                <div>訂購餐廳：@Model.RestaurantName</div>
+
+                @foreach (var product in Model.OrderLists)
+                {
+                    <div class="d-flex my-3">
+                        <div class="border px-2 mr-3">@product.ProductQuantity</div>
+                        <div>@product.ProductName</div>
+                    </div>
+                }
+
+                <div class="d-flex justify-content-between">
+                    <div>總計</div>
+                    <div class="font-weight-bold">@Model.Total TWD</div>
+                </div>
+            </div>
+            <div class="item invite d-flex">
+                <div class="my-auto">
+                    <img src="https://d3i4yxtzktqr9n.cloudfront.net/web-eats-v2/c51b2a12396d63d49b5272de6efa283d.svg">
+                </div>
+                <div class="flex-grow-1">
+                    <div class="mb-2">只要您的好友嘗試使用HolyShong，您就能享有 $100折扣優惠</div>
+                    <button onclick="location.href =@Url.Action("Invite","Member")">邀請好友<i class="fas fa-arrow-right"></i></button>
+                    @* onclick="location.href = '@Url.Action("DeleteUserType","Admin", new { id = })' *@
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+@section topCSS{
+    <style>
+        .cart {
+            display: none;
+        }
+
+        #map {
+            height: 250px;
+        }
+
+        .info {
+            width: 100%;
+            margin: auto;
+            background-color: #fff;
+        }
+
+            .info .item {
+                position: relative;
+                z-index: 50;
+                padding: 24px 16px;
+                border-bottom: 5px solid #EEEEEE;
+                background-color: #ffffff;
+            }
+
+                .info .item:first-of-type {
+                    position: sticky;
+                    top: 0;
+                    background-color: #fff;
+                    z-index: 60;
+                    border-bottom: 1px solid #EEEEEE;
+                    padding: 15px 16px;
+                }
+
+                .info .item:last-of-type {
+                    border-bottom: none;
+                }
+
+                .info .item:nth-of-type(3) {
+                    padding: 0;
+                    border-bottom: 0;
+                }
+
+        .time {
+            position: sticky;
+            top: 20px;
+        }
+
+        .flex-grow-1 {
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .info .item img {
+            width: 100px;
+        }
+
+        .info .invite img {
+            width: 100px;
+        }
+
+        h4:first-of-type {
+            vertical-align: middle;
+        }
+
+        .invite button {
+            background-color: #EEEEEE;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 30px;
+        }
+
+        @@media screen and (min-width:992px) {
+            #map {
+                height: calc(100vh - 95px);
+            }
+
+            main {
+                position: relative;
+                padding: 0 30px;
+            }
+
+            .info {
+                width: 470px;
+                height: calc(100Vh - 200px);
+                margin: 50px 0;
+                overflow-y: scroll;
+                box-shadow: 0 0 5px #CCC;
+            }
+
+                .info .item:nth-of-type(3) {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 10;
+                }
+
+            .flex-grow-1 {
+                flex-grow: 1;
+                text-align: left;
+                padding-left: 10px;
+            }
+
+            footer {
+                margin-top: 0;
+            }
+        }
+    </style>
+}
+
+@section endJS{
+    <!-- GOOGLE MAP API -->
+    @*<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8HcG_N0pXb-DuF-O0WI8nxa5ch7JnyoY&callback=initMap&libraries=&v=weekly"
+            async></script>*@
+    <script>
+        //進度條設定
+        let progressBar = document.querySelector('.progress-bar');
+        if (@Model.OrderStatus == 2) { progressBar.style.width = "15%" }
+        else if (@Model.OrderStatus == 3) { progressBar.style.width = "25%" }
+        else if (@Model.OrderStatus == 4) { progressBar.style.width = "50%" }
+        else if (@Model.OrderStatus == 5) { progressBar.style.width = "75%" }
+        else if (@Model.OrderStatus == 6) { progressBar.style.width = "100%" }
+
+
+        var map, geocoder;
+        let markderCustomer, markerRestaurant;
+        window.onload = () => {
+            initMap();
+        }
+        function initMap() {
+            //載入路線福武與路線顯示圖層
+            var directionsService = new google.maps.DirectionsService();
+            var directionsDisplay = new google.maps.DirectionsRenderer();
+            //var directionsMatrixService = new google.maps.DistanceMatrixService();
+            //啟用地址搜尋
+            geocoder = new google.maps.Geocoder();
+            //初始化地圖
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 25.03416068163684, lng: 121.56454962636319 },
+                zoom: 15,
+                zoomControl: false,
+                mapTypeControl: false,
+                scaleControl: false,
+                streetViewControl: false,
+                rotateControl: false,
+                fullscreenControl: false,
+            });
+
+            //地址搜尋+marker
+            //消費者地址
+            let customerAddress = "@Html.Raw(Model.CustomerAddress)";
+            geocoder.geocode({ 'address': customerAddress }, function (result, status) {
+                if (status == 'OK') {
+                    map.setCenter(result[0].geometry.location);
+                    markerCustomer = new google.maps.Marker({
+                        map: map,
+                        position: result[0].geometry.location,
+                        icon: "https://res.cloudinary.com/dvyxx4jau/image/upload/v1633194189/%E6%93%B7%E5%8F%960-removebg-preview_1_zvsbfo.png"
+                    });
+                }
+                else {
+                    console.log(status);
+                }
+            });
+
+            //餐廳地址
+            let restaurantAddress = "@Html.Raw(Model.RestaurantAddress)";
+            geocoder.geocode({ 'address': restaurantAddress }, function (result, status) {
+                if (status == 'OK') {
+                    markerRestaurant = new google.maps.Marker({
+                        map: map,
+                        position: result[0].geometry.location,
+                        icon: "https://res.cloudinary.com/dvyxx4jau/image/upload/v1633194189/%E6%9C%AA%E5%91%BD%E5%90%8D-removebg-preview_dkdlt2.png"
+                    });
+                }
+                else {
+                    console.log(status);
+                }
+            });
+
+
+            //引用路線圖資
+            directionsDisplay.setMap(map);
+            var request = {
+                origin: customerAddress,
+                destination: restaurantAddress,
+                travelMode: 'DRIVING',
+            }
+
+            //繪製路線
+            directionsService.route(request, function (result, status) {
+                if (status == 'OK') {
+                    console.log(result.routes[0].legs[0].steps);
+                    directionsDisplay = new google.maps.DirectionsRenderer({
+                        map: map,
+                        directions: result,
+                        suppressMarkers: true
+                    });
+                }
+                else {
+                    console.log(status);
+                }
+            });
+
+            let service = new google.maps.DistanceMatrixService();
+            service.getDistanceMatrix(
+                {
+                    origins: [customerAddress],
+                    destinations: [restaurantAddress],
+                    travelMode: 'DRIVING',
+                    drivingOptions: {
+                        //開始外送時間
+                        departureTime: new Date()
+                    },
+                    unitSystem: google.maps.UnitSystem.METRIC,
+                }, function (response, status) {
+                    if (status !== google.maps.DistanceMatrixStatus.OK) {
+                        toastr.error('Error was' + status);
+                    } else {
+                        console.log(response);
+                        //時間顯示
+                        let time = document.querySelector('.info h2.time');
+                        time.innerText = `${new Date(Date.now() + (response.rows[0].elements[0].duration_in_traffic.value) * 1000).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }) }`;
+                    }
+                }
+            );
+        }
+    </script>
+}
+

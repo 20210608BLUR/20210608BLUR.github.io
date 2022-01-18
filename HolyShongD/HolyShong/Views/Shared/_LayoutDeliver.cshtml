@@ -1,0 +1,92 @@
+﻿@{ 
+    HttpCookie cookie = HttpContext.Current.Request.Cookies.Get(FormsAuthentication.FormsCookieName);
+
+    string userid = "";
+    string userName = "";
+    if (cookie != null)
+    {
+        FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(cookie.Value);
+        userid = ticket.Name;
+        userName = ticket.UserData;
+    }
+    var deliver = new HolyShong.Services.OrderService().GetDeliverInfo(userid);
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HolyShong | 給你送</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+          integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;500;900&display=swap"
+          rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <link href="~/Assets/CSS/deliver_layout.css" rel="stylesheet" />
+    @RenderSection("topJS", required: false)
+    @RenderSection("topCSS", required: false)
+
+    <script>
+        var isOnline = @Json.Encode(deliver.isOnline);
+    </script>
+</head>
+<body>
+    <input type="checkbox" class="d-none" id="menu-check">
+    <header class="container">
+        <div class="top">
+            <div class="head d-flex">
+                <label for="menu-check" class="hb my-auto"><i class="fas fa-bars align-middle"></i></label>
+                <div class="logo m-auto">
+                    <a href="~/deliver/index">
+                        <img src="~/Assets/Images/logo.jpg" />
+                    </a>
+                </div>
+            </div>
+            <!-- 上線&登入 -->
+            <div class="status d-flex">
+                <input type="checkbox" @(deliver.isOnline ? "checked" : null) data-toggle="toggle" data-on="上線" data-off="下線" data-onstyle="success" data-offstyle="danger">
+            </div>
+
+            <div class="menu">
+                <div class="name py-4 border-bottom">@userName</div>
+                <div class="function">
+                    @*<div class="account item"><i class="fas fa-user"></i>帳戶資訊</div>*@
+                    <div class="order item" onclick="location.href='@Url.Action("DeliverOrderList", "Deliver")'"><i class="fas fa-receipt"></i>歷史訂單</div>
+                </div>
+                <div class="switch mt-5">
+                    <button class="btn d-block w-100 mb-2" onclick="location.href='@Url.Action("Index", "Home")'">我想要訂餐</button>
+                    <button class="btn d-block w-100 mb-2" onclick="location.href='@Url.Action("RestaurantRegister", "Member")'">餐廳登入</button>
+                    <button class="btn border-secondary w-100" onclick="location.href='@Url.Action("SignOut", "Member")'">登出</button>
+                </div>
+            </div>
+        </div>
+        <div class="bg"></div>
+    </header>
+    @if (!deliver.isOnline)
+    {
+        <div class="bgConnection bgConnection-style">
+            <div class="bgInfo">
+                目前離線中，請於右上角切換上線，開始接單
+            </div>
+        </div>
+    }
+
+
+    @RenderBody()
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+    <script src="~/Assets/JS/deliver_layout.js"></script>
+    @RenderSection("scripts", required: false)
+
+    @RenderSection("endCSS", required: false)
+    @RenderSection("endJS", required: false)
+
+</body>
+</html>

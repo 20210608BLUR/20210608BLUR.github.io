@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "NoSearch";
+}
+@*<div id="subcategory">
+
+</div>*@
+
+<div class="container text-center bodyContainer">
+    <div class="row">
+        <div class="col-12">
+            <img class="" src="~/Assets/Images/noSearch.jpg">
+        </div>
+        <p class="col-12 fontUsualSize">找不到符合</p>
+        @*<p id="searchText" class="col-12">「@ViewBag.keyword」</p>*@
+        <p class="col-12 fontUsualSize">的項目</p>
+        <p class="col-12 text-small">請改為搜尋其他項目</p>
+        <div class="col-12">
+            <button id="seeAllRestaurant" type="button" class="btn btn-dark btn-lg btn-half-block" onclick="location.href='@Url.Action("Index", "Home")'">
+                查看所有餐廳
+            </button>
+        </div>
+    </div>
+</div>
+
+@section topCSS{
+    <style>
+        .bodyContainer {
+            margin-top: 60px;
+            margin-bottom: 60px;
+        }
+
+            .bodyContainer img {
+                width: 40%;
+                margin-bottom: 30px;
+            }
+
+            .bodyContainer p {
+                font-size: 36px;
+                margin: 0;
+                line-height: 1.1;
+            }
+
+        #searchText {
+            font-size: 36px;
+        }
+
+        .bodyContainer .text-small {
+            font-size: 16px;
+            line-height: 3;
+        }
+
+        .btn-half-block {
+            width: 40%;
+            background-color: black;
+        }
+
+            .btn-half-block a {
+                color: white;
+                font-size: 18px;
+            }
+    </style>
+}

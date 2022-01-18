@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <button>FIND DELIVER</button>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        let btn = document.querySelector('button');
+        btn.addEventListener('click', function () {
+            $.ajax({
+                type: 'POST',
+                url: '/Deliver/OrderStateChange',
+                data: { OrderCode: "EAT00001", OrderStatus: 4 },
+                success: function (response) {
+                    toastr.success('成功完成訂單')
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+* {
+    font-size: 14px;
+}
+.orderGroup {
+    max-width: 1920px;
+    padding: 0 20px;
+    background-color: #fff;
+}
+
+.container {
+    max-width: 1920px;
+    padding: 0 20px;
+    position:relative;
+    z-index: 101;
+    background-color:#fff;
+}
+header{
+    border-bottom: 1px solid #888;
+}
+
+header .top {
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+header .head {
+    height: 72px;
+    background-color: #fff;
+}
+
+.hb {
+    width: 30px;
+    height: 30px;
+    margin: 0 15px;
+    cursor: pointer;
+}
+
+.btn:focus {
+    box-shadow: 0 0 0 0.2rem rgb(0 0 0 / 25%);
+}
+
+.logo a img {
+    width: 130px;
+    vertical-align: baseline;
+}
+
+.menu {
+    height: 100vh;
+    width: 300px;
+    position: fixed;
+    top: 0;
+    left: -500px;
+    background-color: #fff;
+    padding: 20px;
+    transition: .5s;
+    border-right: 1px solid #EEEEEE;
+    z-index: 103;
+}
+    .menu .switch button:not(.border-secondary) {
+        color: #fff;
+        background-color: rgb(49,75,88);
+    }
+        .menu .switch button:not(.border-secondary):hover {
+            background-color: rgb(34,56,67);
+        }
+
+        .status {
+            align-items: center;
+        }
+
+    .status .login {
+        display: block;
+        background-color: #EEEEEE;
+        border-radius: 500px;
+        margin-left: 20px;
+    }
+
+        .status .login:hover {
+            background-color: #DBDBDB;
+        }
+
+#menu-check:checked ~ header .menu {
+    left: 0;
+}
+
+.menu i {
+    font-size: 20px;
+    color: rgb(49,75,88);
+    margin-right: 15px;
+}
+
+.bg-style {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    top: 0;
+    z-index: 102;
+}
+
+.bgConnection-style {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    top: 0;
+    z-index: 100;
+}
+
+.function .item {
+    padding-top: 20px;
+    cursor:pointer;
+}
+
+@media screen and (min-width: 992px) {
+    header .top {
+        height: 95px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .status {
+        margin: auto 0;
+        margin-left: 20px;
+    }
+
+    header .head {
+        padding: 0;
+        margin: auto 0;
+        width: auto;
+        position: unset;
+        justify-content: space-between;
+        border: 0;
+    }
+
+        header .head i {
+            font-size: 30px;
+        }
+
+    .menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        left: -500px;
+        transition: .5s;
+    }
+
+    #menu-check:checked ~ header .menu {
+        left: 0;
+    }
+}
+@media screen and (min-width:1024px) {
+    .status .login {
+        padding: 15px 25px;
+    }
+}
+

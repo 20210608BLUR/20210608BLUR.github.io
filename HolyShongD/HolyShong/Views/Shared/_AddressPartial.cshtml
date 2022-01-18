@@ -1,0 +1,154 @@
+﻿@{
+    HttpCookie cookie = HttpContext.Current.Request.Cookies.Get(FormsAuthentication.FormsCookieName);
+
+    string userid = "";
+    if (cookie != null)
+    {
+        FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(cookie.Value);
+        userid = ticket.UserData;
+    }
+    @*var Id = int.Parse(User.Identity.Name)
+    var addressService = new addressService();*@
+    var address = new HolyShong.Services.AddressService().GetAddresses(userid).AddressDetails;
+}
+
+
+<div id="addressApp">
+    <div class="deliver" data-toggle="modal" data-target="#destModal">
+        <div class="item my-auto d-flex">
+            <i class="fas fa-map-marker-alt px-2 m-auto"></i>
+            <div class="destination">{{currentAddress}}</div>
+
+        </div>
+        <div class="my-auto">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </div>
+
+    <span></span>
+    <div class="time"></div>
+    <div>
+
+
+        <!-- 變更外送地點 -->
+        <div class="modal fade" id="destModal" tabindex="-1" aria-labelledby="destModalLabel"
+             aria-hidden="true" data-backdrop="false" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div id="destlist" class="modal-body">
+                        <div class="dest-body">
+                            <h4 class="modal-title mb-3" id="destModalLabel">外送地點？</h4>
+                            <div class="form-group">
+                                <input type="text" placeholder="輸入外送地址" ref="site" v-model="site" class="form-control">
+                            </div>
+                            <div class="mapDiv">
+                                <div id="map" class="mb-3">
+                                </div>
+                            </div>
+                            <!-- 資料庫地址 -->
+                            <div v-for="(item, index) in allAddresses.AddressDetails" :key="index" accesskey=" " class="data d-flex justify-content-between my-3">
+                                <div>
+                                    <i class="fas fa-map-marker-alt p-3"></i>
+                                </div>
+                                <div>
+                                    <button class="btn btn-light" v-on:click="updateAddresses(item)" data-dismiss="modal">{{item.AllAddress}}</button>
+                                </div>
+                                <div>
+                                    <button class="btn btn-sm btn-light rounded-pill ml-3">
+                                        <i v-on:click="deleteAddresses(item)" class="fas fa-trash-alt p-3"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button v-on:click="createAddresses" type="button" class="btn btn-dark py-3 w-100" data-dismiss="modal">完成</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 外送時間 -->
+        @*
+        <div class="modal fade" id="timeModal" tabindex="-1" aria-labelledby="destModalLabel" aria-hidden="true"
+             data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div id="timelist" class="modal-body">
+                        <div class="time-body">
+                            <h4 class="modal-title mb-3" id="timeModalLabel">挑選時間</h4>
+                            <select class="w-100">
+                                <option value="2021-09-04">9月4日 週六</option>
+                                <option value="2021-09-05">9月5日 週日</option>
+                                <option value="2021-09-06">9月6日 週一</option>
+                                <option value="2021-09-07">9月7日 週二</option>
+                            </select>
+                            <select class="w-100">
+                                <option value="1">14:00 - 14:30</option>
+                                <option value="2">14:30 - 15:00</option>
+                                <option value="3">15:00 - 15:30</option>
+                                <option value="4">15:30 - 16:00</option>
+                                <option value="5">16:00 - 16:30</option>
+                                <option value="6">16:30 - 17:00</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark py-3 w-100" data-dismiss="modal">完成</button>
+                        <button type="button" class="btn btn-outline-secondary py-3 w-100"
+                                data-dismiss="modal">
+                            立刻外送
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+    </div>
+</div>
+
+
+<style>
+    .deliver {
+        height: 60px;
+        display: flex;
+        justify-content: space-between;
+        border-width: 0;
+        cursor: pointer;
+    }
+
+        .deliver > div {
+            padding: 0 10px;
+        }
+
+    .pac-container.pac-logo.hdpi {
+        z-index: 5000;
+        position: absolute;
+    }
+
+    .data {
+        max-width: 480px;
+        justify-content: space-around;
+        text-align: left
+    }
+
+    /*.mapDiv {
+            height: 50vh;
+        }*/
+
+    #map {
+        height: 300px;
+    }
+</style>
+
+<script src="~/Assets/JS/Address/address.js"></script>
+

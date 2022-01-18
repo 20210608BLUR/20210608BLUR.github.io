@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "ShowModal";
+}
+
+
+<div>
+    <div class="checkEmail d-flex justify-content-center">
+        <img src="~/Assets/Images/checkEmail.jpg" class="imgNoShow" />
+        <img src="~/Assets/Images/checkEmail.jpg" class="imgNoShow imgShow" />
+        <img src="~/Assets/Images/checkEmail.jpg" class="imgNoShow"/>
+    </div>
+</div>
+
+
+
+
+
+
+@section topCSS
+{
+    <style>
+        .checkEmail{
+            overflow:hidden;
+        }
+        .checkEmail img {
+            height:400px;
+        }
+        .imgNoShow {
+            opacity: 0;
+        }
+        .imgShow{
+            opacity:1;
+        }
+    </style>
+
+}
+
+@section endJS
+{
+    <script>
+        let img = document.querySelectorAll(".checkEmail img");
+        slideImgShow();
+        setInterval(slideImgShow, 3000);
+        function slideImgShow() {
+            for (let i = 0; i < img.length; i++) {
+                setTimeout(() => {
+                    img[i].classList.remove("imgShow");
+                    if (i == img.length - 1) {
+                        img[0].classList.add("imgShow");
+                    } else {
+                        img[i + 1].classList.add("imgShow");
+                    }
+                }, i * 1000)
+            }
+        }
+    </script>
+}
+
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

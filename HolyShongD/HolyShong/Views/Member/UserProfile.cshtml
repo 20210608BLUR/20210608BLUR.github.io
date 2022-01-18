@@ -1,0 +1,153 @@
+﻿@model UserProfileViewModel
+@{
+    bool IsUpdate = Model.IsUpdate;       
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.MemberId)
+    @Html.HiddenFor(x => x.Email)
+    <div class="personalGroup container">
+        <div class="personalInfo">
+            <h2>會員資料修改</h2>
+            <div class="name row mt-3">
+                <label class="col-4 " for="lastName">會員姓氏</label>
+                @Html.EditorFor(x => x.LastName, new { htmlAttributes = new { @class = "col-8 form-control" } })
+                @Html.ValidationMessageFor(x => x.LastName, "", new { @class = "text-danger" })
+            </div>
+            <div class="name row mt-3">
+                <label class="col-4" for="firstName">會員名字</label>
+                @Html.EditorFor(x => x.FirstName, new { htmlAttributes = new { @class = "col-8 form-control" } })
+                @Html.ValidationMessageFor(x => x.FirstName, "", new { @class = "text-danger" })
+            </div>
+            <div class="phone row mt-3">
+                <label class="col-4" for="tel">聯絡電話</label>
+                @Html.EditorFor(x => x.Cellphone, new { htmlAttributes = new { @class = "col-8 form-control" } })
+                @Html.ValidationMessageFor(x => x.Cellphone, "", new { @class = "text-danger" })
+            </div>
+            @if (Model.IsPrimary)
+            {
+                @Html.HiddenFor(x => x.IsPrimary)
+                @Html.HiddenFor(x => x.PrimaryEndTime)
+                <div class="member row mt-3">
+                    <div class="col-4 memberTxt">會員狀態</div>
+
+                    <div class="col-8">送送會員</div>
+
+                </div>
+                <div class="member row mt-3">
+                    <div class="col-4 memberTxt">到期時間</div>
+
+                    <div class="col-8">@Model.PrimaryEndTime</div>
+
+                </div>
+            }
+            else
+            {
+                <div class="member row mt-3">
+                    <div class="col-4 memberTxt">會員狀態</div>
+                    <div class="col-8 align-items-center">
+                        <div>一般會員</div>
+                    </div>
+                </div>
+                <div class="member row mt-3">
+                    <div class="col-4 memberTxt">會員升級</div>
+                    <div class="col-8 align-items-center">
+                        <button type="button" class="btn btn-dark btn-sm align-items-center" id="GetPrimary" onclick="location.href='@Url.Action("BecomeVIP", "Payment")'">送送會員只要120元</button>
+                    </div>
+                </div>
+            }
+            <div class="email row mt-3">
+                <div class="emailTxt col-4">電子郵件</div>
+                <div class="emailInfo col-8">@Model.Email</div>
+            </div>
+            <div class="col-12 align-items-center text-center">
+                <button type="submit" class="col-6 saveBtn btn btn-dark mt-3 " data-toggle="modal" data-target="#submitResultModal">儲存變更</button>
+            </div>
+
+
+
+            @Html.ValidationSummary()
+
+        </div>
+    </div>
+}
+@section topCSS
+{
+    <style>
+        .personalGroup * {
+            font-size: 18px;
+        }
+
+        .container {
+            max-width: 1920px;
+        }
+
+        .personalGroup {
+            display: flex;
+            margin-top: 80px;
+        }
+
+        .personalInfo {
+            margin: 23px auto;
+        }
+
+            .personalInfo h2 {
+                font-size: 20px;
+            }
+
+            .personalInfo .row .col-4 {
+                margin-top: auto;
+                margin-bottom: auto;
+            }
+
+        .layout {
+            height: 60px;
+            background: red;
+        }
+        /* name */
+        /*.name {
+            margin-top: 16px;
+        }*/
+
+        .emailInfo, .app h4 {
+            font-weight: bold;
+        }
+        /* phone */
+        /*.phone {
+            margin: 16px 0;
+        }*/
+
+        /* email */
+        /*.email {
+            margin: 16px 0;
+        }*/
+
+        /* saveBtn */
+        .saveBtn {
+            margin-bottom: 16px;
+        }
+
+        @@media screen and (min-width:1200px) {
+            .personalInfo {
+                width: 800px;
+            }
+        }
+    </style>
+}
+
+@section endJS{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    @if (IsUpdate)
+    {
+        <script>
+            window.onload = function () {
+                alert('修改成功');
+            }
+        </script>
+    }
+}
+
+

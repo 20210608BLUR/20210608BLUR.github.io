@@ -1,0 +1,38 @@
+body{
+    display:flex;
+    flex-direction:column;
+    height:100vh;
+}
+.container{
+    max-width: 1980px;
+    margin: auto;
+}
+header {
+    text-align: center;
+}
+header img{
+    width: 300px;
+}
+footer{
+    margin: 50px 0 0;
+    padding: 50px 0;
+    background-color: rgb(49,75,88);
+    color: #fff;
+    width: 100%;
+}
+.privacy a{
+    padding-left: 10px;
+    text-decoration: none;
+    color: #fff;
+}
+.privacy a:first-child{
+    padding-right: 10px;
+    border-right: 1px solid #fff;
+}
+
+@media screen and (min-width:992px) {
+    .footer-body{
+        display: flex;
+        justify-content: space-between;
+    }
+}

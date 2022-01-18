@@ -1,0 +1,825 @@
+﻿@model CartViewModel
+<div class="container-fluid" id="checkApp">
+    <div class="row align-items-start">
+        <div class="col-lg-6 col-sm-12 left">
+            <h1 class="my-3">{{store.StoreName}}</h1>
+            <div class="mapDiv">
+                <div id="map" class="mb-3"></div>
+            </div>
+
+            <!-- 設定地址-->
+            <div class="d-flex addressInfo">
+                <div class="iconDiv mb-1">
+                    <i class="fas fa-home"></i>
+                </div>
+                <div class="mx-1 flex-grow-1">
+                    <span>{{store.CustomerAddress}}</span><br>
+                </div>
+                <div>
+                    <button type="button" class="editBtn btn  rounded-pill" data-toggle="modal" data-target="#destModal">
+                        編輯
+                    </button>
+                </div>
+            </div>
+
+            <!-- 設定外送指示 -->
+            <div class="d-flex info">
+                <div class="iconDiv mb-2">
+                    <i class="fas fa-child"></i>
+                </div>
+                <div class="d-flex flex-grow-1 ml-1">
+                    <span class="flex-grow-1 my-auto">新增外送指示</span><br>
+                    <b-form-select class="w-50" v-model="store.Note" :options="options"></b-form-select>
+                </div>
+            </div>
+
+            <!-- 設定外送時間 -->
+            <div class="d-flex">
+                <div class="iconDiv">
+                    <i class="fas fa-dot-circle"></i>
+                </div>
+                <div class="flex-grow-1 deliverTime d-flex">
+                    <span class="ml-1">預估送達時間</span>
+                    <span class="timeAmount mx-3"></span>
+                </div>
+            </div>
+
+            <!-- 設定優惠卷 -->
+            <div class="d-flex discountInfo">
+                <div class="iconDiv">
+                    <i class="fas fa-tag"></i>
+                </div>
+                <div class="mx-1 flex-grow-1">
+                    <span>{{selectDiscount.DiscountName}}</span>
+                </div>
+                <div>
+                    <button type="button" class="editDiscount btn  rounded-pill" data-toggle="modal" data-target="#discountModal" v-on:click="openCheckOutDiscount">
+                        選擇優惠
+                    </button>
+                </div>
+            </div>
+
+            <!-- 您的餐點 -->
+            <div class="addOrderDiv">
+                <h3 class="mt-2">您的餐點</h3>
+            </div>
+            <div class="d-flex orderContent mt-3" v-for="(p,index) in store.CartItems">
+                <div class="d-flex my-auto">
+                    <div class="select my-auto d-flex">{{p.Quantity}}</div>
+                    <div class="my-auto">
+                        <div class="orderContentBtn  ml-2 pt-1">
+                            <span>{{p.ProductName}}</span><br>
+                            <span v-for="storeProductOption in p.StoreProductOptions">
+                                <span v-for="detail in storeProductOption.ProductOptionDetails" v-show="storeProductOption.SelectOption == detail.StoreProductOptionDetailId">
+                                    {{detail.StoreProductOptioinDetailName}} <br>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="my-auto">
+                    <div id="price" class="mx-3">
+                        ${{sum(p)}}
+                    </div>
+                </div>
+            </div>
+            <div class="otherItems my-3">
+                <label class="w-100" for="oItem">索取餐具、吸管等用品</label>
+                <input v-model="store.IsTablewares" class="" id="oItem" type="checkbox" style="zoom:180%">
+            </div>
+            <div class="plasticBag my-3">
+                <label class="w-100" for="plastic">索取袋子</label>
+                <input v-model="store.IsPlasticbag" class="" id="plastic" type="checkbox" style="zoom:180%">
+            </div>
+        </div>
+        <div class="col-lg-6 col-sm-12 right">
+            <div class="right payOut">
+                <div class="mt-3">
+                    <button v-on:click="sendForm" type="button" class="finallyOrder rounded-0 btn w-100">
+                        <span>一鍵下訂單</span>
+                    </button>
+                </div>
+                <div class="rule border-bottom my-4">
+                    <p>條款： 按一下按鈕送出訂單，即表示您確認已詳閱隱私政策，並且同意 HolyShong 的使用條款</p>
+                    <p>若合作外送夥伴抵達時您不在附近，他們會把訂單放在門口。送出訂單即表示您同意在訂單送達後承擔全部責任。</p>
+                </div>
+                <div>
+                    <ul class="border-bottom">
+                        <li class="d-flex ">
+                            <div>小計</div>
+                            <span>$ {{totalSum}}</span>
+                        </li>
+                        <li class="d-flex">
+                            <div>折扣</div>
+                            <span>-$ {{discountPrice}}</span>
+                        </li>
+                        <li class="d-flex">
+                            <div>外送費</div>
+                            <span>${{store.DeliverFee}}</span>
+                        </li>
+                        <li v-show="store.DeliverFee !=0" class="text-center">
+                            <a class="text-center" href="~/Member/Eatpass">不想付外送費嗎? &nbsp&nbsp馬上升級送送會員</a>
+                        </li>
+                    </ul>
+                    <div class="total d-flex" id="totalPrice">
+                        <div>總計</div>
+                        <div>$ {{finalPrice}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    @using (Html.BeginForm("PayForCart", "Payment", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="d-none">
+            <div class="form-group">
+                <label for="formOption">外送選項</label>
+                <input type="text" id="formOption" v-model="store.Note" name="CustomerNote" />
+            </div>
+            <div class="form-group">
+                <label for="formTableware">餐具</label>
+                <input type="checkbox" id="formTableware" v-model="store.IsTablewares" name="IsTablewares" />
+            </div>
+            <div class="form-group">
+                <label for="formPlasticbag">塑膠袋</label>
+                <input type="checkbox" id="formPlasticbag" v-model="store.IsPlasticbag" name="IsPlasticbag" />
+            </div>
+            <div class="form-group">
+                <label for="formStoreName">店家名稱</label>
+                <input type="text" id="formStoreName" v-model="store.StoreName" name="StoreName" />
+            </div>
+            <div class="form-group">
+                <label for="formDiscount">優惠卷</label>
+                <input type="number" id="formDiscount" v-model="selectDiscount.DiscountMemberId" name="MemberDiscountId" />
+            </div>
+            <div class="form-group">
+                <label for="formDeliverFee">外送費</label>
+                <input type="number" id="formDeliverFee" v-model="store.DeliverFee" name="DeliverFee" />
+            </div>
+            <div class="form-group">
+                <label for="formTotal">總額</label>
+                <input type="number" id="formTotal" v-model="finalPrice" name="TotalPrice" />
+            </div>
+            <input id="sendFormToOrder" type="submit" />
+        </div>
+    }
+
+</div>
+
+<!-- 設定外送地址Modal -->
+@*@Html.Partial("_AddressPartialView")*@
+<div class="modal fade" id="destModal" tabindex="-1" aria-labelledby="destModalLabel" aria-hidden="true"
+     data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="destlist" class="modal-body">
+                <div class="dest-body">
+                    <h4 class="modal-title mb-3" id="destModalLabel">外送地點？</h4>
+                    <input type="text" placeholder="輸入外送地址">
+                    紀錄地址
+                    <div class="d-flex justify-content-between my-3">
+                        <div>
+                            <i class="fas fa-map-marker-alt p-3"></i>
+                            <p class="d-inline m-0">台北市大安區忠孝東路三段96號11號樓之1</p>
+                        </div>
+                        <div>
+                            <i class="fas fa-pencil-alt p-3"></i>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between my-3">
+                        <div>
+                            <i class="fas fa-map-marker-alt p-3"></i>
+                            <p class="d-inline m-0">台北市大安區忠孝東路三段96號11號樓之1</p>
+                        </div>
+                        <div>
+                            <i class="fas fa-pencil-alt p-3"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark py-3 w-100" data-dismiss="modal">完成</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section topCSS
+ {
+    <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css" />
+
+    <!-- Load polyfills to support older browsers -->
+    <script src="//polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver" crossorigin="anonymous"></script>
+
+    <!-- Load Vue followed by BootstrapVue -->
+    <script src="//unpkg.com/vue@latest/dist/vue.min.js"></script>
+    <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
+
+    <!-- Load the following for BootstrapVueIcons support -->
+    <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+            integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <style>
+        .cart {
+            display: none !important;
+        }
+
+        .row i {
+            font-size: 20px;
+            color: rgb(49,75,88);
+        }
+
+        .payOut {
+            display: flex;
+            flex-direction: column-reverse;
+        }
+
+        #checkApp {
+            margin-top: 80px;
+        }
+
+        .leaflet-top, .leaflet-bottom, .leaflet-control {
+            z-index: 100;
+        }
+
+        body {
+            font-family: sans-serif;
+        }
+
+        .container {
+            max-width: 1920px;
+        }
+
+        .container-fluid {
+            max-width: 1920px;
+        }
+
+        .mapDiv {
+            height: 50vh;
+        }
+
+        #map {
+            height: 100%;
+        }
+
+        h1 {
+            text-align: left;
+        }
+
+        nav {
+            height: 80px;
+            width: auto;
+            background-color: white;
+        }
+
+        .discountInfo {
+            font-size: 18px;
+            padding: 20px 0;
+            justify-content: center;
+            align-items: center;
+            border-top: 1px solid #ccc;
+        }
+
+        .addressInfo {
+            font-size: 18px;
+            padding: 20px 0;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .info {
+            font-size: 18px;
+            padding: 20px 0;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .addressInfo span:first-child {
+            font-size: 16px;
+        }
+
+        .addressInfo span:last-child {
+            font-size: 14px;
+        }
+
+        .info span:first-child {
+            font-size: 16px;
+        }
+
+        .info span:last-child {
+            font-size: 14px;
+        }
+
+        .addInfo {
+            color: rgb(5, 148, 79);
+        }
+
+        .fas.fa-plus {
+            font-size: 14px;
+        }
+
+        .fas.fa-map-marker-alt {
+            font-size: 16px;
+        }
+
+        .orderContent {
+            justify-content: space-between;
+        }
+
+        .select {
+            height: 38px;
+            width: 90px;
+            padding: 10px;
+            border-radius: 20px;
+            background: rgb(238, 238, 238);
+            justify-content: center;
+            align-items: center;
+        }
+
+        select {
+            height: 36px;
+            width: 80px;
+            border-radius: 20px;
+            border: 0px;
+            line-height: 36px;
+            padding: 0px 5px 0px 0px;
+            background: rgb(238, 238, 238);
+        }
+
+        .otherItems {
+            background-color: rgb(246, 246, 246);
+            width: auto;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: auto;
+        }
+
+            .otherItems input {
+                margin: 15px;
+            }
+
+            .otherItems label {
+                margin: 15px;
+            }
+
+        .a {
+            background-color: rgb(246, 246, 246);
+            width: auto;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: auto;
+        }
+
+        .plasticBag {
+            background-color: rgb(246, 246, 246);
+            width: auto;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: auto;
+        }
+
+            .plasticBag input {
+                margin: 15px;
+            }
+
+            .plasticBag label {
+                margin: 15px;
+            }
+
+        .finallyOrder {
+            background-color: rgb(255,205,0);
+            border: 0px;
+            width: 600px;
+            margin: auto;
+            height: 60px;
+            color: black;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            font-size: 18px;
+        }
+
+            .finallyOrder:hover {
+                background-color: #FFC20E;
+            }
+
+        .addOrderBtn {
+            background-color: rgb(238, 238, 238);
+            height: 35px;
+            padding-left: 10px;
+            padding-right: 10px;
+            border: 0px;
+        }
+
+            .addOrderBtn span {
+                font-size: 14px;
+                display: inline-block;
+            }
+
+        .addOrderDiv {
+            padding-top: 20px;
+            justify-content: center;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .editDiscount,
+        .editBtn {
+            background-color: rgb(238, 238, 238);
+            min-width: 60px;
+            height: 36px;
+            border: 0px;
+            font-size: 14px;
+        }
+
+        .orderContentBtn {
+            text-align: left;
+        }
+
+            .orderContentBtn span:first-child {
+                font-size: 16px;
+            }
+
+            .orderContentBtn span:last-child {
+                font-size: 14px;
+            }
+
+        ul {
+            padding: 0px;
+        }
+
+        li {
+            list-style: none;
+            display: block;
+            padding: 7px;
+            justify-content: space-between;
+        }
+
+        .save {
+            background-color: rgb(230, 242, 237);
+        }
+
+            .save p {
+                color: rgb(5, 148, 79);
+                font-size: 14px;
+                text-align: center;
+            }
+
+        .rule span {
+            color: rgb(5, 148, 79);
+            font-size: 12px;
+        }
+
+        .rule p {
+            font-size: 12px;
+        }
+
+        .iconDiv {
+            width: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h3 {
+            font-size: 20px;
+        }
+
+        .deliverTime {
+            justify-content: space-between;
+            padding: 20px 0;
+        }
+
+            .deliverTime span {
+                font-size: 16px;
+            }
+
+        .setPavementTitle {
+            padding-top: 25px;
+            border-top: rgb(238, 238, 238)solid 2px;
+        }
+
+        .setPavementDiv span {
+            font-size: 16px;
+        }
+
+        .setPavementDiv {
+            justify-content: center;
+            align-items: center;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            border-bottom: rgb(238, 238, 238)solid 2px;
+        }
+
+        #totalPrice {
+            justify-content: space-between;
+            padding: 8px;
+        }
+
+        .modalAddress {
+            display: flex;
+            justify-content: start;
+            align-items: center;
+        }
+
+        #destModal input {
+            outline: none;
+            width: 100%;
+            border-width: 0;
+            padding: 12px 16px;
+            box-shadow: inset 0px -1px 0px #e2e2e2;
+            background-color: #F6F6F6;
+        }
+
+        .left {
+            padding: 0px 30px 0px 30px;
+        }
+
+        .right {
+            padding: 0px 15px 0px 15px;
+        }
+
+        .storeModalContent {
+            border: none;
+        }
+
+        .storeModalBody {
+            padding: 0;
+        }
+
+        .imgAndClose {
+            position: relative;
+        }
+
+        .imgAndClosePic {
+            width: 100%;
+            height: 200px;
+        }
+
+            .imgAndClosePic img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+        .imgAndClose .fa-times-circle {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #fff;
+        }
+
+        .addGroup {
+            display: flex;
+            text-align: center;
+        }
+
+        .quantityAddWrap {
+            justify-content: center;
+        }
+
+        .selectedBgc {
+            background: rgb(246, 246, 246);
+        }
+
+        .addItemBgC {
+            padding: 10px 0;
+        }
+
+            .addItemBgC i {
+                padding: 0 15px;
+            }
+
+        .addToCart {
+            text-align: center;
+        }
+
+        #price {
+            font-size: 16px;
+            text-align: right;
+        }
+
+        .cardWrap input {
+            border: none;
+            padding: 24px;
+        }
+
+        .input {
+            width: 100%;
+        }
+
+        .cardWrap {
+            height: 500px;
+        }
+
+        .billTxt {
+            background: rgb(246, 246, 246);
+        }
+
+            .billTxt p {
+                padding: 10px;
+            }
+
+        .scroll {
+            overflow: auto;
+            height: 500px;
+            display: block;
+        }
+
+        .addGroup {
+            display: flex;
+        }
+
+        .quantityAddWrap {
+            justify-content: space-between;
+            margin: auto;
+        }
+
+        .addToCartWrap button {
+            margin: 10px;
+        }
+
+        /* 桌機 */
+        @@media screen and (min-width: 992px) {
+            .payOut {
+                display: unset;
+            }
+
+            #checkApp {
+                margin-top: 0;
+            }
+
+            .card img {
+                width: 88px;
+                height: 120px;
+            }
+
+            .addGroup {
+                display: flex;
+                text-align: center;
+            }
+
+            .quantityAddWrap {
+                justify-content: center;
+            }
+
+            .storeModalBody {
+                display: flex;
+                width: 100%;
+            }
+
+            .imgAndClose {
+                width: 50%;
+            }
+
+            .imgAndClosePic img {
+                height: 500px;
+            }
+
+            .cardWrap {
+                width: 50%;
+            }
+
+            .right {
+                position: sticky;
+                top: 0px;
+            }
+        }
+    </style>
+}
+
+
+
+@section endJS
+{     @*GOOGLE MAP API*@
+@*<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8HcG_N0pXb-DuF-O0WI8nxa5ch7JnyoY&callback=initMap&libraries=&v=weekly"
+    async></script>*@
+
+<script>
+        let checkInfo = @Html.Raw(Json.Encode(Model));
+        console.log(checkInfo);
+
+        var map;
+        var markerCustomer, markerRestaurant;
+        window.onload = () => {
+            initMap();
+        }
+
+        //Google Map
+        function initMap() {
+            var geocoder = new google.maps.Geocoder();
+            var directionsService = new google.maps.DirectionsService();
+            var directionsDisplay = new google.maps.DirectionsRenderer();
+
+            map = new google.maps.Map(document.getElementById('map'), {
+                //抓外送位置
+                center: { lat: 25.03416068163684, lng: 121.56454962636319 },
+                zoom: 15,
+                zoomControl: false,
+                mapTypeControl: false,
+                scaleControl: false,
+                streetViewControl: false,
+                rotateControl: false,
+                fullscreenControl: false,
+            });
+
+            //消費者地址
+            let customerAddress = "@Html.Raw(Model.CustomerAddress)";
+            geocoder.geocode({ 'address': customerAddress }, function (result, status) {
+                if (status == 'OK') {
+                    markerCustomer = new google.maps.Marker({
+                        map: map,
+                        position: result[0].geometry.location,
+                        icon: "https://res.cloudinary.com/dvyxx4jau/image/upload/v1633194189/%E6%93%B7%E5%8F%960-removebg-preview_1_zvsbfo.png"
+                    });
+                }
+                else {
+                    console.log(status);
+                }
+            });
+
+             //餐廳地址
+            let restaurantAddress = "@Html.Raw(Model.StoreAddress)";
+            geocoder.geocode({ 'address': restaurantAddress }, function (result, status) {
+                if (status == 'OK') {
+                    markerRestaurant = new google.maps.Marker({
+                        map: map,
+                        position: result[0].geometry.location,
+                        icon: "https://res.cloudinary.com/dvyxx4jau/image/upload/v1633194643/%E6%93%B7%E5%8F%96-removebg-preview_1_xzrsbn.png"
+                    });
+                }
+                else {
+                    console.log(status);
+                }
+            });
+
+            //引用路線圖資
+            directionsDisplay.setMap(map);
+            var request = {
+                origin: customerAddress,
+                destination: restaurantAddress,
+                travelMode: 'DRIVING',
+            }
+
+            //繪製路線
+            directionsService.route(request, function (result, status) {
+                if (status == 'OK') {
+                    console.log(result.routes[0].legs[0].steps);
+                    directionsDisplay = new google.maps.DirectionsRenderer({
+                        map: map,
+                        directions: result,
+                        suppressMarkers: true
+                    });
+                }
+                else {
+                    console.log(status);
+                }
+            });
+
+            let service = new google.maps.DistanceMatrixService();
+            service.getDistanceMatrix(
+                {
+                    origins: [customerAddress],
+                    destinations: [restaurantAddress],
+                    travelMode: 'DRIVING',
+                    drivingOptions: {
+                        //開始外送時間
+                        departureTime: new Date()
+                    },
+                    unitSystem: google.maps.UnitSystem.METRIC,
+                }, function (response, status) {
+                    if (status !== google.maps.DistanceMatrixStatus.OK) {
+                        window.alert('Error was' + status);
+                    } else {
+                        console.log(response);
+                        //時間顯示
+                        let time = document.querySelector('.timeAmount');
+                        time.innerText = `${new Date(Date.now() + 30 * 60000 + (response.rows[0].elements[0].duration_in_traffic.value) * 1000).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}`;
+                    }
+                }
+            );
+        }
+</script>
+<script src="~/Assets/JS/checkout.js" type="text/javascript"></script>
+}

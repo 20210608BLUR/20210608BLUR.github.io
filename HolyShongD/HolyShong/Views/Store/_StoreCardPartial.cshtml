@@ -1,0 +1,234 @@
+﻿<main>
+
+    <!-- 卡片區塊 -->
+    <div class="cardCol">
+        <div class="foodCard" style="cursor:pointer;">
+            <a href="#" style="text-decoration:none;">
+                <div class="headline">
+                    <img class="pic" src="https://picsum.photos/300/100/?random=1">
+                    <div class="dark"><i class="fas fa-moon"></i>已關閉</div>
+                    <div class="Tag">買1送1</div>
+                </div>
+                <div class="foodText">
+                    <div class="shopNameandPoint">
+                        <div class="shopName">Burger King漢堡王 松山店</div>
+                        <div class="point">4.7</div>
+                    </div>
+                    <div class="TWD">
+                        <span class="ntd">55TWD 費用</span>
+                        <div class="dotSpace"><span class="dot"> • </span></div>
+                        <span class="min">25–35 分鐘</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="touchZone" style="cursor:pointer;">
+            <div class="favoriteHeart">
+                <div class="switchP" onclick="clickChangeC()">
+                    <!-- 空心 -->
+                    <i class="far fa-heart hEmpty"></i>
+                    <!-- 實心 -->
+                    <i class="fas fa-heart hSolid"></i>
+                    <i class="fas fa-heart hSolid4hover"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</main>
+
+@section topCSS
+    {
+    <style>
+        .pic {
+            width: 100%;
+        }
+        .dark{
+            position: absolute;
+            background-color: rgba(24, 24, 24, 0.788);
+            top: 0;
+            width: 100%;
+            height: 100%;
+            color: white;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            display: none;
+        }
+        .unitContainer {
+            display: block;
+            max-width: 98%;
+            width: 100%;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .row{
+                margin-left: 0;
+                margin-right: 0;
+            }
+        .titleService{
+            margin: 20px 0 20px 0;
+        }
+        .Tag{
+            line-height: 16px;
+            display: inline-block;
+            background-color: #05a357;
+            border-radius: 0 24px 24px 0;
+            color: #ffff;
+            font-size: 14px;
+            padding: 4px 12px;
+            position: absolute;
+            left: 0;
+            top: 10px;
+        }
+        .headline{
+            position: relative;
+        }
+        .cardCol{
+            margin-bottom: 30px;
+            display: flex;
+            position: relative;
+        }
+        .touchZone{
+            position: absolute;
+            top:0;
+            right: 0;
+        }
+        .foodCard{
+            width: 100%;
+        }
+        .favoriteHeart{
+            display: flex;
+            height: 28px;
+            width: 50px;
+            justify-content: flex-start;
+            align-items: center;
+            position: absolute;
+            right: 0;
+            top: 10px;
+        }
+        .switchP{
+            position: relative;
+            display: flex;
+            width: 20px;
+            height: 20px;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .hSolid4hover {
+            z-index: 2;
+            position: absolute;
+            color: rgb(177, 177, 177);
+            display: none;
+        }
+        .hEmpty {
+            position: absolute;
+            color: rgb(253, 253, 253);
+            display: none;
+        }
+        .switchP:hover .hEmpty{
+            display: none;
+        }
+        .switchP:hover .hSolid4hover{
+            z-index: 2;
+            display: block;
+        }
+        .hSolid {
+            z-index: 2;
+            position: absolute;
+            color: rgb(253, 253, 253);
+            display: block;
+        }
+        .shopNameandPoint{
+            display: flex;
+            font-weight: 500;
+            width: 100%;
+            margin-top: 12px;
+            align-items: center;
+            flex-flow: wrap row;
+            justify-content: space-between;
+            color: black;
+        }
+        .point{
+            display: flex;
+            height: 28px;
+            width: 28px;
+            border-radius: 50%;
+            background: #EEEEEE;
+            font-size: 12px;
+            justify-content: center;
+            align-items: center;
+        }
+        .shopName{
+            font-size: 20px;
+        }
+        .TWD{
+            display: flex;
+            color: black;
+        }
+        .dotSpace{
+            margin: 0 10px 0 10px;
+        }
+        @@media screen and (max-width:992px) {
+            .favoriteHeart{
+            display: flex;
+            height: 28px;
+            width: 50px;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            right: 0;
+            top: 10px;
+            }
+        }
+
+        @@media screen and (min-width:992px) {
+            .titleService{
+            margin: 20px 0 20px 0;
+            padding: 0 15px 0 15px;
+            }
+            .cardCol{
+            margin-bottom: 30px;
+            display: flex;
+            position: relative;
+            padding-right: 15px;
+            padding-left: 15px;
+            }
+
+        }
+
+    </style>
+    }
+
+@section endJS
+    {
+    <Script>
+        ////啟動無法提供
+        // window.onload = function(){
+        //     canntService();
+        // }
+
+        function clickChangeC() {
+            let solid = event.path[1].childNodes[7];
+            let empty = event.path[1].childNodes[3];
+
+            if (solid.style.display == "block") {
+                solid.style.display = "none"
+                empty.style.display = "block"
+            }
+            else {
+                solid.style.display = "block"
+                empty.style.display = "none"
+            }
+        };
+
+            ////無法提供功能
+            // function canntService(){
+            //     let darkOn = document.getElementById("serviceOff");
+            //     darkOn.style.display = "flex"
+            // };
+
+    </Script>
+    }

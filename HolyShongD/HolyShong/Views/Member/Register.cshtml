@@ -1,0 +1,254 @@
+﻿@model HolyShong.ViewModels.MemberRegisterViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    ViewBag.Title = "Register";
+    bool emailUsed=false;
+    if (Model != null && Model.MailIsUsed) 
+    { 
+        emailUsed = true; 
+    }
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <main>
+        <div class="core">
+            <div class="combined">
+                <!-- 區段 下-->
+                <div class="bottom">
+                    <div>
+                        <h4 class="title">開始註冊</h4>
+                        <div class="colInfo">
+                            <div class="form-group">
+                                <label for="phoneNum">請輸入您的手機號碼(必填)</label>
+                                @*<input type="text" class="form-control phNum" id="phoneNum">*@
+                                @Html.EditorFor(model => model.Cellphone, new { htmlAttributes = new { @class = "form-control", @id = "phoneNum" } })
+                                @Html.ValidationMessageFor(model => model.Cellphone, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputFirstname">名字(必填)</label>
+                                    @*<input type="text" class="form-control" id="inputFirstname">*@
+                                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @id = "inputFirstname" } })
+                                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputLastname">姓氏(必填)</label>
+                                    @*<input type="text" class="form-control" id="inputLastname">*@
+                                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @id = "inputLastname" } })
+                                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail">信箱(必填)</label>
+                                @*<input type="text" class="form-control" id="inputEmail">*@
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @id = "inputEmail" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                @if ( emailUsed == true)
+                                {
+                                <p class="text-danger">信箱已註冊，請直接登入或換一個信箱</p>                                    
+                                }
+                            </div>
+                            <div class="form-group">
+                                <label for="inputAddress">地址(必填)</label>
+                                @Html.EditorFor(model => model.AddressDetails, new { htmlAttributes = new { @class = "form-control", @id = "inputAddress" } })
+                                @Html.ValidationMessageFor(model => model.AddressDetails, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword">密碼(必填)</label>
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @id = "inputPassword", @type = "password" } })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                <div class="fa-stack fa-1x eye" id="tArea1">
+                                    <i class="fas fa-stack-1x eyeOpen1 fa-eye-slash" id="eye"></i>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="ConfirmPassword">確認密碼(必填)</label>
+                                @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", @id = "ConfirmPassword", @type = "password" } })
+                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                                <div class="fa-stack fa-1x eye" id="tArea2">
+                                    <i class="fas fa-stack-1x eyeOpen2 fa-eye-slash" id="eye2"></i>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-lg btn-secondary form-control" id="nextStep" disabled>下一步</button>
+                            </div>
+
+                            <div class="signText">
+                                已經註冊過Holy Shong?
+                                <a href="@Url.Action("Login", "Member")" class="greenLink">請登入</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+}
+
+
+@section topCSS
+    {
+    <style>
+        .bottom {
+            margin: auto;
+            max-width: 552px;
+            min-width: 289px;
+        }
+
+        h4 {
+            margin: 18px auto;
+        }
+
+        .colInfo {
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            justify-content: center;
+            align-items: stretch;
+        }
+
+        .inputName {
+            display: flex;
+        }
+
+        .form-control {
+            margin: 0;
+            max-width: 75%;
+            min-width: 100%
+        }
+
+        .sel {
+            width: none;
+        }
+
+        .colInfo button {
+            margin-top: 24px;
+        }
+
+        .signText {
+            margin: 24px auto;
+            text-align: center;
+        }
+
+        a {
+            color: rgb(255, 253, 253);
+        }
+
+        .btn {
+            background-color: rgb(255, 205, 0);
+        }
+
+            .btn:hover:enabled {
+                background-color: #FFC20E;
+            }
+
+        .greenLink {
+            color: rgb(49, 75, 88);
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .eye {
+            position: absolute;
+            top: 35px;
+            right: 0px;
+        }
+
+        @@media screen and (max-width:664px) {
+            .bottom {
+                margin: auto;
+                max-width: 289px;
+                min-width: 289px;
+            }
+        }
+    </style>
+}
+
+@section endJS
+    {
+    <Script>
+        const phoneElement = document.getElementById("phoneNum");
+        const fnameElement = document.getElementById("inputFirstname");
+        const lnameElement = document.getElementById("inputLastname");
+        const emailElement = document.getElementById("inputEmail");
+        const addressElement = document.getElementById("inputAddress");
+        const passElement = document.getElementById("inputPassword");
+        const passElement2 = document.getElementById("ConfirmPassword");
+
+        const inputElements = [phoneElement, fnameElement, lnameElement, emailElement, addressElement, passElement, passElement2]
+
+        for (let i = 0; i < inputElements.length; i++) {
+            inputElements[i].addEventListener("change", function (event) {
+                if (phoneElement.value != "" && fnameElement.value != "" && lnameElement.value != "" && emailElement.value != "" && addressElement.value != "" && passElement.value != "" && passElement2.value != "") {
+                    document.getElementById("nextStep").disabled = false;
+                    document.getElementById("nextStep").setAttribute("class", "btn btn-lg btn-warning form-control")
+
+                }
+                else {
+                    document.getElementById("nextStep").disabled = true;
+                    document.getElementById("nextStep").setAttribute("class", "btn btn-lg btn-secondary form-control")
+                }
+            });
+        }
+
+
+
+
+    </Script>
+    <script>
+        //eye1 jQuery
+        $('#eye').on('click', function () {
+            if ($('.eyeOpen1').hasClass("fa-eye")) {
+                //如果eyeOpen有fa-eye(show)這個屬性
+                $('.eyeOpen1').removeClass("fa-eye")//就去掉
+                $('.eyeOpen1').addClass("fa-eye-slash")//改加fa-eye-slash(hide)
+                $('#inputPassword').attr('type', 'password')
+                //把input type屬性text改password
+            } else {
+                $('.eyeOpen1').addClass("fa-eye")
+                $('.eyeOpen1').removeClass("fa-eye-slash")
+                $('#inputPassword').attr('type', 'text')
+            }
+        })
+
+        $('#eye2').on('click', function () {
+            if ($('.eyeOpen2').hasClass("fa-eye")) {
+                //如果eyeOpen有fa-eye(show)這個屬性
+                $('.eyeOpen2').removeClass("fa-eye")//就去掉
+                $('.eyeOpen2').addClass("fa-eye-slash")//改加fa-eye-slash(hide)
+                $('#ConfirmPassword').attr('type', 'password')
+                //把input type屬性text改password
+            } else {
+                $('.eyeOpen2').addClass("fa-eye")
+                $('.eyeOpen2').removeClass("fa-eye-slash")
+                $('#ConfirmPassword').attr('type', 'text')
+            }
+        })
+
+        function initialize() {
+            var input = document.getElementById('inputAddress');
+            new google.maps.places.Autocomplete(input);
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+
+
+}
+
+@section scripts
+{
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8HcG_N0pXb-DuF-O0WI8nxa5ch7JnyoY&libraries=places&v=weekly"></script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+}

@@ -1,0 +1,213 @@
+﻿@{
+    HttpCookie cookie = HttpContext.Current.Request.Cookies.Get(FormsAuthentication.FormsCookieName);
+
+    string userid = "";
+    var address = new List<AddressDetail>();
+    if (cookie != null)
+    {
+        FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(cookie.Value);
+        userid = ticket.Name;
+        address = new HolyShong.Services.AddressService().GetAddresses(int.Parse(userid)).AddressDetails;
+    }
+
+
+    @*var Id = int.Parse(User.Identity.Name)
+        var addressService = new addressService();*@}
+
+
+<div id="addressApp">
+    @if (userid != "")
+    {
+    <div class="deliver " data-toggle="modal" data-target="#destModal">
+        <div class="d-flex">
+            <i class="fas fa-map-marker-alt px-2 m-auto"></i>
+            <div class="item my-auto d-flex">
+                <div class="destination"><p class="ellipsis">{{currentAddress}}</p></div>
+            </div>
+        </div>
+        <div class="my-auto">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </div>
+     }
+     else
+     {
+        <div class="deliver" onclick="location.href='@Url.Action("Login", "Member")'" >
+            <div class="item my-auto d-flex">
+                <i class="fas fa-map-marker-alt px-2 m-auto"></i>
+                <div class="destination" style="width:60px">台北市</div>
+            </div>
+            <div class="my-auto">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+     }
+
+    <span></span>
+    <div class="time"></div>
+    <div>
+
+
+        <!-- 變更外送地點 -->
+        <div class="modal fade" id="destModal" tabindex="-1" aria-labelledby="destModalLabel"
+             aria-hidden="true" data-backdrop="false" data-keyboard="false">
+            <div class="modal-dialog">
+                <div id="addressaaa"class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div id="destlist" class="modal-body">
+                        <div class="dest-body">
+                            <h4 class="modal-title mb-3" id="destModalLabel">外送地點？</h4>
+                            <div class="form-group">
+                                <input type="text" placeholder="輸入外送地址" ref="site" v-model="site" class="form-control">
+                            </div>
+                            <div class="mapDiv">
+                                <div id="mapAddress" class="mb-3">
+                                </div>
+                            </div>
+                            <!-- 資料庫地址 -->
+                            <div v-for="(item, index) in allAddresses.AddressDetails" :key="index" accesskey=" " class="data d-flex justify-content-between my-3">
+                                <div>
+                                    <i class="fas fa-map-marker-alt p-3"></i>
+                                </div>
+                                <div>
+                                    <button class="btn btn-light addressBtn" v-on:click="updateAddresses(item)" data-dismiss="modal">{{item.AllAddress}}</button>
+                                </div>
+                                <div>
+                                    <button class="btn btn-sm btn-light rounded-pill ml-3">
+                                        <i v-on:click="deleteAddresses(item)" class="fas fa-trash-alt p-3"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button v-on:click="createAddresses" type="button" class="btn btn-dark py-3 w-100" data-dismiss="modal">完成</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+
+
+<style>
+        .deliver {
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            border-width: 0;
+            cursor: pointer;
+        }
+
+            .deliver > div {
+                padding: 0 10px;
+            }
+
+          .destination{
+            width:70px;
+        }
+        .ellipsis {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            line-height: 58px
+        }
+
+
+        .pac-container.pac-logo.hdpi {
+            z-index: 5000;
+            position: absolute;
+        }
+
+        .data {
+            max-width: 480px;
+            justify-content: space-around;
+            text-align: left
+        }
+
+        /*.mapDiv {
+                height: 50vh;
+            }*/
+
+        #mapAddress {
+            height: 300px;
+            
+        }
+        .addressBtn{
+            text-align:left;
+            background-color:transparent;
+            border:0px;
+        }
+    .modal fade.modal-backdrop {
+        background-color: transparent;
+    }
+        
+     
+
+    @@media screen and (min-width: 992px) {
+        .destination {
+            width: 100px;
+        }
+
+        .ellipsis {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            line-height: 38px
+        }
+        
+        .addressBtn {
+            text-align: left;
+            background-color: transparent;
+            border: 0px;
+        }
+        .modal fade.modal-backdrop{
+            background-color:transparent;
+        }
+
+    }
+
+
+    @@media screen and (min-width:1024px) {
+        .destination{
+            width:100px;
+        }
+        .ellipsis {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            line-height: 38px
+        }
+      
+        .addressBtn {
+            text-align: left;
+            background-color: transparent;
+            border: 0px;
+        }
+        .modal fade.modal-backdrop {
+            background-color: transparent;
+        }
+
+
+    }
+
+</style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    @*<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>*@
+    <script src="~/Assets/JS/Address/address.js"></script>
+   <script>
+       $('#destModal').on('shown.bs.modal', function (e) {
+           // do something...
+           //console.log('shown.bs.modal')
+           //$('.modal-backdrop').css('z-index','0')
+       })
+   </script>
+
+
